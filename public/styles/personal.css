@@ -1,0 +1,21 @@
+.monies {
+    background-color: var(--primaryColor);
+    padding:30px;
+    height: 20vh;
+  }
+  .personal-savings-tab{
+
+    background-color: var(--primaryColor);
+    padding:30px;
+    height: 30vh;
+   
+  }
+
+  .share-balance{
+    justify-content: space-between;
+    
+  }
+ .label {
+    font-size: 16px;
+    color: var(--fontAltColor);
+  }

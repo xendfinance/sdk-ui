@@ -1,0 +1,17 @@
+import React, { useEffect } from 'react';
+import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
+import Personal from './pages/personal/Personal'
+import Esusu from './pages/esusu/Esusu'
+
+
+function Routes(){
+    return(
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" component={Personal} />
+                <Route exact path="/esusu" component={Esusu} />
+            </Switch>
+        </BrowserRouter>
+    )
+}
+export default Routes;

@@ -1,0 +1,67 @@
+html {
+        --navBackgroundColor: #FFFFFF;
+        --backgroundColor: #f1f1f0;
+        --primaryColor: rgb(255, 255, 255);
+        --strokeColor: #F1F1F1;
+        --fontColor: #363636;
+        --strokeAltColor: #6D6D6D;
+        --moniescolor: #797979;
+        --fontAltColor: #7c7c7c;
+     
+
+}
+
+.mt1 { margin-top: 10px; }
+.mt2 { margin-top: 20px; }
+.mt5 { margin-top: 50px; }
+.mb1 { margin-bottom: 10px; }
+.mb2 { margin-bottom: 20px; }
+.mb5 { margin-bottom: 50px; }
+.mr1 { margin-right: 10px; }
+.mr2 { margin-right: 20px; }
+.mr5 { margin-right: 50px; }
+.ml1 { margin-left: 10px; }
+.ml2 { margin-left: 20px; }
+.ml5 { margin-left: 50px; }
+
+.pt1 { padding-top: 10px; }
+.pt2 { padding-top: 20px; }
+.pt5 { padding-top: 50px; }
+.pb1 { padding-bottom: 10px; }
+.pb2 { padding-bottom: 20px; }
+.pb5 { padding-bottom: 50px; }
+.pr1 { padding-right: 10px; }
+.pr2 { padding-right: 20px; }
+.pr5 { padding-right: 50px; }
+.pl1 { padding-left: 10px; }
+.pl2 { padding-left: 20px; }
+.pl5 { padding-left: 50px; }
+
+.font9 { font-size: 9px; }
+.font12 { font-size: 12px; }
+.font14 { font-size: 14px; }
+.font16 { font-size: 16px; }
+.font18 { font-size: 18px; }
+.font21 { font-size: 21px; }
+.font24 { font-size: 24px; }
+.font36 { font-size: 36px; }
+.font42 { font-size: 42px;}
+
+.semi-bold { font-weight: 600;}
+.bold { font-weight: 700;}
+
+
+.flex { display: flex; }
+.flex-column { display: flex; flex-direction: column;}
+.flex-wrap { flex-wrap: wrap; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-space-between { justify-content: space-between; }
+.align-center { align-items: center; }
+
+.w1 { width: 10vw; }
+.w2 { width: 20vw; }
+.w7 { width: 70vw; }
+
+.inline { display: inline; } 
+.capitalize { text-transform: capitalize;}

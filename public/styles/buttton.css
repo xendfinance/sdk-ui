@@ -1,0 +1,57 @@
+
+.button {
+    cursor: pointer;
+    display: inline-block;
+    border:none;
+    padding:10px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    font-weight: 600;
+  }
+  
+  
+  .button:focus {
+    outline: none;
+  }
+  
+  .button.default {
+    background: -webkit-linear-gradient(95.81deg, #2042B8 -4.73%, #FF6600 157.32%);
+    background: linear-gradient(95.81deg, #2042B8 -4.73%, #FF6600 157.32%);
+    color:white;
+  }
+  
+  .button.secondary {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(333.6deg, #2042B8, 53.9%, #FF6600 157.96%);
+      background: -webkit-linear-gradient(333.6deg, #2042B8, 53.9%, #FF6600 157.96%);
+      padding:2px;
+  }
+  
+  
+  .button:disabled {
+    background: var(--disabledButtonBackgroundColor) !important;
+    color: var(--disabledButtonColor) !important;
+    cursor:not-allowed;
+  }
+  
+  .button.button.secondary > div {
+  display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--primaryColor);
+      border-radius: 30px;
+      padding:10px 30px;
+      font-size: 18px;
+      color: var(--fontColor);
+  }
+  
+  .button.block {
+    display: block;
+    width:15vw;
+  }
+  .button:hover {
+  
+    opacity: 0.5;
+  }

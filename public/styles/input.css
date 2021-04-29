@@ -1,0 +1,59 @@
+
+.input-style > div.label {
+    color: var(--fontColor);
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    margin-left: 7px;
+  }
+  
+  .input-style > div.label.invisible {
+    visibility: hidden;
+  }
+  
+  .input-style input, .input-style select{
+    display: block;
+    width: 100%;
+    border:none;
+    border-radius: 38px;
+    border: 2px solid var(--strokeAltColor);
+    box-sizing: border-box;
+    padding:10px 20px;
+    font-size: 18px;
+    background-color: transparent;
+    color: var(--fontColor);
+  }
+  
+  .input-style select:active {
+    color: #333;
+  }
+  
+  .input-style input::placeholder, .input-style select::placeholder {
+    font-size: 18px;
+    color: var(--fontAltColor);
+    line-height: 32px;
+  }
+  
+  .input-style input:focus, .input-style select:focus {
+    outline: none;
+    border:2px solid #2042B8;
+  }
+  
+  .date-time-side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  
+  .time-interval-selector {
+    display:grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 20px;
+  }
+  
+  select.filter-select {
+    background-color: transparent;
+    color: var(--blueOrangeAccent);
+    border-color: transparent;
+    font-size: 16px;
+  }
