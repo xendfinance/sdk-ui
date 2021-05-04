@@ -1,51 +1,51 @@
 .layout{
-    height: 100vh;
-    width: 100%;
     font-family: "Fira Sans",sans-serif;
-    background-color: var(--primaryColor);
-   
+    background-color: palegreen;
 }
 
 .layout-top{
-    height: 15vh;
-    width: 100%;
-    background-color: var(--navBackgroundColor);
-    border-bottom: 1px solid var(--strokeColor);
-    
+  border-radius: 4.886318683624268px;
+  background-color: var(--navBackgroundColor); 
+  height: 120px;
+  box-sizing: border-box;
 }
+
 .layout-body{
-    height: 90vh;
-    width: 100%;
-    background-color: var(--backgroundColor);
+  background-color: var(--backgroundColor);
+  height: 570px;
+   
 }
 .navbar{
-    background-color: nav(--navBackgroundColor);
-    width: 100vw;
-    border-top: 1px solid var(--strokeColor);
- 
+  background: var(--navBackgroundColor);
 }
 .navbar ul{
-
-    margin: 0;
-    padding: 0;
-    display: flex;
+  margin: 0;
+  padding: 0;
+  display: flex;
 
 }
 .navbar li{
-    list-style-type: none;
-    margin: 2vh 10vw;
-    font-size: 2vh;
+
+  list-style-type: none;
+  list-style-type: none;
+  margin: 2vh 6vw;
+  font-size: 2vh;
 }
 
 .title {
-    background: -webkit-linear-gradient(333.6deg, #2042B8, 53.9%, #FF6600 157.96%);
-    background: linear-gradient(333.6deg, #2042B8, 53.9%, #FF6600 157.96%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 20px;
-
-  }
+  background: linear-gradient(90deg, #2241b4, #924410);
+  /* background: -webkit-linear-gradient(333.6deg, #2042B8, 100%, #FF6600 100%); */
+  /* background: linear-gradient(333.6deg, #2042B8, 53.9%, #c06224 157.96%); */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+   
+  position: absolute;
+  width: 140px;
+  font-family: Fira Sans;
+  font-weight: bold;
+  font-size: 18px;
+}
   
   .top-connection-lg {
     display: flex;
@@ -54,13 +54,14 @@
     border-radius: 30px;
     background: linear-gradient(333.6deg, #2042B8, 53.9%, #FF6600 157.96%);
     padding:2px;
+    margin-bottom: 20px;
   }
 
   .top-connection-lg > div.not-connected {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:10px;
+    padding: 2px;
     background-color: var(--primaryColor);
     border-radius: 30px;
     cursor: pointer;
@@ -80,4 +81,17 @@
   .top-connection-lg i.fa-circle {
     color:#34D530;
     font-size: 8px;
+  }
+
+  .connect-wallet-text{
+    
+    font-family: Fira Mono;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 7px;
+
+    
+    
+    color: #080808;
+
   }

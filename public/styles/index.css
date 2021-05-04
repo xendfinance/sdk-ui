@@ -7,12 +7,14 @@ html {
         --strokeAltColor: #6D6D6D;
         --moniescolor: #797979;
         --fontAltColor: #7c7c7c;
+        --linearColor: linear-gradient(90deg, #2241b4, #924410);
      
 
 }
 
 .mt1 { margin-top: 10px; }
 .mt2 { margin-top: 20px; }
+.mt3 { margin-top: 30px; }
 .mt5 { margin-top: 50px; }
 .mb1 { margin-bottom: 10px; }
 .mb2 { margin-bottom: 20px; }
@@ -22,7 +24,11 @@ html {
 .mr5 { margin-right: 50px; }
 .ml1 { margin-left: 10px; }
 .ml2 { margin-left: 20px; }
+.ml3 { margin-left: 30px; }
+.ml4 { margin-left: 40px; }
 .ml5 { margin-left: 50px; }
+.ml7 { margin-left: 70px; }
+
 
 .pt1 { padding-top: 10px; }
 .pt2 { padding-top: 20px; }
@@ -56,11 +62,15 @@ html {
 .flex-wrap { flex-wrap: wrap; }
 .justify-center { justify-content: center; }
 .justify-end { justify-content: flex-end; }
+.justify-start { justify-content: flex-start; }
 .justify-space-between { justify-content: space-between; }
+.justify-space-around { justify-content: space-around; }
 .align-center { align-items: center; }
 
 .w1 { width: 10vw; }
 .w2 { width: 20vw; }
+.w3 { width: 30vw; }
+.w5 { width: 50px; }
 .w7 { width: 70vw; }
 
 .inline { display: inline; } 

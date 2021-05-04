@@ -29,7 +29,7 @@
   }
   
   .input-style input::placeholder, .input-style select::placeholder {
-    font-size: 18px;
+    font-size: 12px;
     color: var(--fontAltColor);
     line-height: 32px;
   }

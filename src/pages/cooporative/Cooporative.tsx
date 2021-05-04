@@ -1,20 +1,22 @@
 import React, { ReactChild, ReactNode } from "react";
 import Layout from '../components/layout/Layout'
 import TopBar from './TopBar'
-import Monies from './PersonalMonies'
-import SavingsTab from './SavingsTab'
+import Monies from './CooporativeMonies'
+import SearchTab from './SearchTab'
+import CooporativeGroup from './CooporativeGroups'
 
-function Personal(){
+function Cooporative(){
 
     return(
         <Layout> 
             <div>
                 <TopBar />
                 <Monies />
-                <SavingsTab />
+                <SearchTab />
+                <CooporativeGroup />
             </div>    
         </Layout>
     )
 
 }
-export default Personal;
+export default Cooporative;

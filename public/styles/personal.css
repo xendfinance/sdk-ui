@@ -1,21 +1,62 @@
+.personal-protocol-select{ 
+  background-color: #F6F6F6;
+  border-radius: 10px;
+  width: fit-content;
+  margin-left: 110px;
+}
+
 .monies {
-    background-color: var(--primaryColor);
-    padding:30px;
-    height: 20vh;
-  }
-  .personal-savings-tab{
+  height: 146px;
+  margin: 10px 10px 10px 10px;
+  border: 1px solid #EDEDED;
+  border-radius: 4.88632px;
+  background-color: var(--primaryColor);
+}
 
-    background-color: var(--primaryColor);
-    padding:30px;
-    height: 30vh;
-   
-  }
-
-  .share-balance{
-    justify-content: space-between;
-    
-  }
- .label {
-    font-size: 16px;
+.personal-savings-tab{
+    background-color: aquamarine;
+    height: 222px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 4.88632px;
+    background-color: var(--primaryColor);  
+}
+.monies-label{
+  /* margin-left: -25px; */
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--fontAltColor);
+}
+.savings-tab-label {
+    margin-left: 10px;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
     color: var(--fontAltColor);
+  }
+  .dai-label{
+    margin-left: 5px;
+    color: #000000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .dai-stable-coin{
+    margin-left: -20px;
+    margin-top: 3px;
+    font-weight: 500;
+    font-size: 10px;
+    color: var(--fontAltColor);
+  }
+
+  .monies-values{
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .savings-tab-values{
+    color: #2F2F2F;
+    font-weight: 500;
+    font-size: 13px;
   }

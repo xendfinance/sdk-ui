@@ -1,0 +1,86 @@
+.esusu-protocol-select{ 
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    margin-left: -50px;
+    
+}
+.esusu-xend-logo{
+    margin-left: 5px;
+}
+
+.esusu-monies{
+    height: 60px;
+    margin: 5px 5px 5px 5px;
+    border-radius: 4.88632px;
+    background-color: var(--primaryColor);
+    box-shadow: 0px 6.84085px 12.7044px rgba(0, 0, 0, 0.05);
+}
+.search-tab{
+    height: 50px;
+}
+.create-esusu-group-button{
+    font-size: 8px;
+}
+.ml1 .button.button.secondary > div {
+    padding: 5px 10px;
+    font-size: 10px;
+}
+.create-esusu-group-button .button {
+    padding: 2px 5px 5px 5px;
+}
+.plus-img{
+    margin: 2px 3px 0px 0px;
+}
+
+.esusu-filter{
+    font-size: 12px;
+    color : #969696;
+    background-color: #F6F6F6;
+    height: fit-content;
+    width: fit-content;
+}
+.esusu-groups{
+    height: fit-content;
+    background-color: var(--primaryColor);
+    margin: 10px 5px 5px 5px;
+}
+.esusu-group-status{
+    display: flex;
+    background-color: rgba(255, 102, 0, 0.06);;
+    margin-right: 90%;
+}
+.esusu-group-symbol{
+    background-color: #ACB820;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 500;
+    padding-top: 2PX;
+    color: #FFFF;
+    margin: 5px 5px 0px 10px ;
+}
+.esusu-group-name{
+    font-size: 8px;
+    font-weight: 500;
+    padding: 10px 0px 0px 0px;
+}
+.esusu-group-label{
+    font-weight: normal;
+    font-size: 9px;
+    color: #9E9E9E;
+
+
+}
+.esusu-group-value{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 9.63378px;
+    line-height: 259.69%;    
+    color: #474747;
+}
+.esusu-group-join-button .button.button.secondary > div {
+    padding: 2px 20px;
+}

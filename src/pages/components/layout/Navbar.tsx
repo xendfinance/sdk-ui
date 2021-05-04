@@ -12,41 +12,41 @@ function Navbar(){
         <div className="navbar">
             <ul>
                 <li>
-                    <div className="container"  onClick={() => history.push(`/`)}>
-                        <div className="row">
-                            <img src={personalImage} alt="Personal Icon"/>
+                     <div className=""   onClick={() => history.push(`/`)}>
+                         <div className="">
+                             <img src={personalImage} alt="Personal Icon"/>
+                         </div>
+                         <div className="">
+                             Personal
+                         </div>
+                     </div>  
+                </li>
+                <li>
+                    <div className=""  onClick={() => history.push(`/esusu`)}>
+                        <div className="">
+                            <img src={groupImage} alt="Group Icon"/>
                         </div>
-                        <div className="row">
-                            Personal
+                        <div className="">
+                            ESUSU
                         </div>
                     </div>  
                 </li>
                 <li>
-                    <div className="container" onClick={() => history.push(`/esusu`)}>
-                        <div className="row">
+                    <div className=""  onClick={() => history.push(`/cooporative`)}>
+                        <div className="">
                             <img src={groupImage} alt="Group Icon"/>
                         </div>
-                        <div className="row">
-                            ESUSU
+                        <div className="">
+                            Cooperative
                         </div>
-                    </div>      
+                    </div>  
                 </li>
                 <li>
-                    <div className="container">
-                        <div className="row">
-                            <img src={groupImage} alt="More Icon"/>
-                        </div>
-                        <div className="row">
-                            Cooporative
-                        </div>
-                    </div>      
-                </li>
-                <li>
-                    <div className="container">
-                        <div className="row">
+                    <div className="mt1">
+                        <div className="">
                             <img src={moreImage} alt="More Icon"/>
                         </div>
-                        <div className="row">
+                        <div className="">
                             More
                         </div>
                     </div>     
@@ -56,3 +56,14 @@ function Navbar(){
     )
 }
 export default Navbar;
+          
+
+
+
+
+
+//             </ul>
+//         </div>  
+//     )
+// }
+// export default Navbar;
