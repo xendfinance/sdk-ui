@@ -25,13 +25,17 @@
 
 }
 .navbar li{
-
   list-style-type: none;
   list-style-type: none;
   margin: 2vh 6vw;
   font-size: 2vh;
 }
-
+.active{
+  background: linear-gradient(90deg, #617ee6, #ec7b2f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .title {
   background: linear-gradient(90deg, #2241b4, #924410);
   /* background: -webkit-linear-gradient(333.6deg, #2042B8, 100%, #FF6600 100%); */

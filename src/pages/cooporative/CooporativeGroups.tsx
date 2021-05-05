@@ -7,7 +7,7 @@ function CooporativeGroups(){
     return(
             <div className='esusu-groups'>
                 <div className='esusu-group-status'>
-                    <div className='font9' style={{color:'#FF6600'}}>pedning</div>
+                    <div className='esusu-status-text'>pedning</div>
                 </div>  
                 <div className="flex">
                     <div className='esusu-group-symbol'>

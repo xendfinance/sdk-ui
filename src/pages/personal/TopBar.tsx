@@ -23,7 +23,9 @@ function TopBar(){
                     <div >
                         <span style={{fontSize:'11px'}}><ToolTip  content="This cycle currently has just one member." /></span>
                         <select name="protocols" id="protocols" style={{border:'0px', fontSize:'11.985px', color : '#969696', backgroundColor:'#F6F6F6'}}>
-                            <option value="Venus">Lending Protocol</option>
+                            <option value="">Lending Protocol</option>
+                            <option value="">Defi Dollar </option>
+                            <option value="">Fortube </option>
                         </select>
                     </div>
                 </div>

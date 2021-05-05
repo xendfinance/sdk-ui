@@ -6,9 +6,9 @@ function EsusuGroups(){
 
     return(
             <div className='esusu-groups'>
-                <div className='flex'>
-                    <div className='font9'>pedning</div>
-                </div>  
+               <div className='esusu-group-status'>
+                    <div className='esusu-status-text'>pedning</div>
+                </div>
                 <div className="flex">
                     <div className='esusu-group-symbol'>
                         MG

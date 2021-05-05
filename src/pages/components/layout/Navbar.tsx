@@ -2,17 +2,20 @@ import React, { ReactChild, ReactNode } from "react";
 import personalImage from '../../../images/personal.svg';
 import groupImage from '../../../images/groups.svg'
 import moreImage from '../../../images/more.svg'
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 function Navbar(){
     
     const history = useHistory();
+    let { pathname } = useLocation();
+
+    console.log(pathname, 'path name is consoled')
  
     return (
         <div className="navbar">
             <ul>
                 <li>
-                     <div className=""   onClick={() => history.push(`/`)}>
+                     <div className={checkcurrent(['/'], pathname).active}   onClick={() => history.push(`/`)}>
                          <div className="">
                              <img src={personalImage} alt="Personal Icon"/>
                          </div>
@@ -22,7 +25,7 @@ function Navbar(){
                      </div>  
                 </li>
                 <li>
-                    <div className=""  onClick={() => history.push(`/esusu`)}>
+                    <div className={checkcurrent(['/esusu'], pathname).active}  onClick={() => history.push(`/esusu`)}>
                         <div className="">
                             <img src={groupImage} alt="Group Icon"/>
                         </div>
@@ -32,7 +35,7 @@ function Navbar(){
                     </div>  
                 </li>
                 <li>
-                    <div className=""  onClick={() => history.push(`/cooporative`)}>
+                    <div className={checkcurrent(['/cooporative'], pathname).active}  onClick={() => history.push(`/cooporative`)}>
                         <div className="">
                             <img src={groupImage} alt="Group Icon"/>
                         </div>
@@ -57,13 +60,11 @@ function Navbar(){
 }
 export default Navbar;
           
-
-
-
-
-
-//             </ul>
-//         </div>  
-//     )
-// }
-// export default Navbar;
+function checkcurrent(paths: Array<string>, pathname: string) {
+    let active = paths.includes(pathname) ? 'active' : '';
+    let isactive = active ? false : true;
+    return {
+        active,
+        isactive
+    }
+}
