@@ -83,6 +83,10 @@
     line-height: 259.69%;    
     color: #474747;
 }
+.esusu-group-join-button{
+    margin-right: 5vw;
+}
 .esusu-group-join-button .button.button.secondary > div {
     padding: 2px 20px;
+    
 }

@@ -9,11 +9,10 @@ function Navbar(){
     const history = useHistory();
     let { pathname } = useLocation();
 
-    console.log(pathname, 'path name is consoled')
  
     return (
-        <div className="navbar">
-            <ul>
+        <div className="navbar ">
+            <ul className='flex justify-space-between'>
                 <li>
                      <div className={checkcurrent(['/'], pathname).active}   onClick={() => history.push(`/`)}>
                          <div className="">
