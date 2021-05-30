@@ -1,10 +1,30 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { personal } from "../methods/sdk";
+
 
 const Address = () => {
+
+    const [address, setAddress] = useState('');
+
+    const trunc = (address: string) => {
+        if (address.length > 15) {
+            address = address.slice(0, 6) + '...' + address.slice(-4);
+        }
+        return address;
+    }
+
+    useEffect(() => {
+        (async () => {
+            const v = await personal.retrieveWallet();
+            setAddress(v.address);
+        })();
+    }, [])
+
     return (
         <AddressStyle>
             <div>
-                <p>000...f291</p>
+                <p>{trunc(address)}</p>
             </div>
         </AddressStyle>
     )

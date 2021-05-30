@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { personal } from "../methods/sdk";
-import { BoldInfo, Labels } from "./Styles";
+import { personal } from "../../methods/sdk";
+import InputNumber from "../InputNumber";
+import { BoldInfo, ButtonStyle, Labels } from "../Styles";
 
 interface Props {
     walletBalance: string
@@ -29,10 +30,9 @@ const FlexibleDeposit = (props: Props) => {
                 <Labels>Wallet Balance</Labels>
             </div>
 
-            <input
-                type="text"
+            <InputNumber
                 value={amount}
-                onChange={e => setAmount(e.target.value)} />
+                onChange={e => setAmount(e)} />
 
             <ul>
                 {
@@ -45,7 +45,13 @@ const FlexibleDeposit = (props: Props) => {
             </ul>
 
             <div>
-                <button onClick={() => submit()}>deposit</button>
+                <ButtonStyle
+                    primary={true}
+                    onClick={() => submit()}>
+                    <div>
+                        <p>deposit</p>
+                    </div>
+                </ButtonStyle>
             </div>
         </FlexDeposit>
     )
@@ -64,6 +70,15 @@ const FlexDeposit = styled.div`
 
         & li {
             flex: 1;
+            display: flex;
+            justify-content: center;
+
+            & button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
         }
     }
 

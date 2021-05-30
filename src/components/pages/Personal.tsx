@@ -1,18 +1,24 @@
 import { personal } from '../../methods/sdk';
 import styled from "styled-components";
 import Info from "../Info";
-import { BoldInfo, Labels } from '../Styles';
+import { BoldInfo, ButtonStyle, Labels } from '../Styles';
 import { useEffect, useState } from 'react';
 import { ReactComponent as BUSD } from '../../resx/busd.svg';
 import { frmBigNum } from '../../methods/utils';
 import Modal from '../Modal';
-import FlexibleDeposit from '../FlexibleDeposit';
+import FlexibleDeposit from '../personal/FlexibleDeposit';
+import FlexibleWithdraw from '../personal/FlexibleWithdraw';
+import FixedDepo from '../personal/FixedDepo';
+import FixedList from '../personal/FixedList';
 
 function Personal() {
 
     const [wallet, setWallet] = useState("0");
     const [flexibleInfo, setFlexibleInfo] = useState<any>({});
     const [saveModal, setSaveModal] = useState(false);
+    const [withdrawModal, setWithdrawModal] = useState(false);
+    const [fixedDepoModal, setFixedDepoModal] = useState(false);
+    const [fixedList, setFixedList] = useState(false);
 
 
     useEffect(() => {
@@ -66,14 +72,51 @@ function Personal() {
                         </Labels>
                         <BoldInfo>{(Number(flexibleInfo.balance) * 10 ** 18).toFixed(4)}</BoldInfo>
                     </div>
-                    <button onClick={() => setSaveModal(true)}>save</button>
-                    <button>withdraw</button>
+                    <ButtonStyle primary onClick={() => setSaveModal(true)}>
+                        <div>
+                            <p>save</p>
+                        </div>
+                    </ButtonStyle>
+                    <ButtonStyle onClick={() => setWithdrawModal(true)}>
+                        <div>
+                            <p>withdraw</p>
+                        </div>
+                    </ButtonStyle>
                 </FlexibleActions>
             </CardStyle>
 
-            {/* <CardStyle>
+
+
+            <CardStyle>
                 <p>fixed savings</p>
-            </CardStyle> */}
+                <Labels>Share Balance</Labels>
+                <p>{200}</p>
+
+                <FixedActions>
+                    <div className="coin">
+                        <figure>
+                            <BUSD
+                                height={25}
+                                width={25} />
+                        </figure>
+                        <div>
+                            <p>{personal.currency}</p>
+                            <Labels>
+                                <p>Stablecoin</p>
+                            </Labels>
+                        </div>
+                    </div>
+                    <ButtonStyle onClick={() => setFixedDepoModal(true)}>
+                        <div>
+                            <p>Deposit</p>
+                        </div>
+                    </ButtonStyle>
+                </FixedActions>
+                <div>
+                    <button onClick={() => setFixedList(true)}>view fixed deposits</button>
+                </div>
+            </CardStyle>
+
 
 
 
@@ -83,6 +126,33 @@ function Personal() {
                 visible={saveModal}>
                 <FlexibleDeposit walletBalance={wallet} />
             </Modal>
+
+            {/* Flexible Withdraw */}
+            <Modal
+                title="Withdraw"
+                visible={withdrawModal}
+                close={() => setWithdrawModal(false)}>
+                <FlexibleWithdraw shareBalance={flexibleInfo.shareBalance} />
+            </Modal>
+
+            {/* Fixed Deposit */}
+            <Modal
+                title="Fixed Deposit"
+                visible={fixedDepoModal}
+                close={() => setFixedDepoModal(false)}>
+                <FixedDepo walletBalance={wallet} />
+            </Modal>
+
+            {/* Withdraw Fixed Deposit */}
+            <Modal
+                title="Withdraw Deposits"
+                visible={fixedList}
+                close={() => setFixedList(false)}>
+                <div>
+                    <FixedList />
+                </div>
+            </Modal>
+
         </>
     )
 }
@@ -109,6 +179,24 @@ const FlexibleActions = styled.section`
         overflow: hidden;
         padding: 15px 5px;
     }
+
+    & .coin {
+        display: flex;
+        align-items: center;
+
+        & div {
+            flex: 1;
+            margin-left: 5px;
+        }
+    }
+`;
+
+const FixedActions = styled.section`
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(3, auto);
+    column-gap: 10px;
+    row-gap: 10px;
 
     & .coin {
         display: flex;

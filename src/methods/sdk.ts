@@ -12,5 +12,4 @@ export const personal = new Personal(chainId, privateKey, options);
 export const esusu = new Esusu(chainId, privateKey, options);
 export const cooperative = new Cooperative(chainId, privateKey, options);
 
-
 export default new XF(chainId, privateKey, options);

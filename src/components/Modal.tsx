@@ -61,9 +61,9 @@ const ModalStyle = styled.div<StyleProps>`
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 10px;
 
     & > div {
+        padding: 20px;
         position: relative;
         height: 100%;
         width: 100%;
@@ -74,6 +74,7 @@ const ModalStyle = styled.div<StyleProps>`
 
     ${({ open, show }) => open && css`
         display : block;
+        background-color: white;
 
         & > div {
             ${show && css`
@@ -96,6 +97,7 @@ const ModalControl = styled.div`
         background-color: transparent;
         padding: 10px 20px;
         font-size: 1.2rem;
-        font-weight: 700
+        font-weight: 700;
+        cursor: pointer;
     }
 `;
