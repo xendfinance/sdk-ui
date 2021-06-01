@@ -57,6 +57,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.react-datepicker-wrapper {
+	width: 100%;
+}
+.uppercase {
+	text-transform: uppercase;
+}
 `;
 
 

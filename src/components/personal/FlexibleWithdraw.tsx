@@ -1,22 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { regActivity } from "../../App";
 import { personal } from "../../methods/sdk";
-import { frmBigNum } from "../../methods/utils";
+import { frmBigNum, handlePresi, randomId } from "../../methods/utils";
 import InputNumber from "../InputNumber";
 import { BoldInfo, ButtonStyle, Labels } from "../Styles"
 
 
+
 interface Props {
     shareBalance: any
+    close: Function
 }
 
 const FlexibleWithdraw = (props: Props) => {
     const shareBal = frmBigNum(props.shareBalance, 'venus');
     const [amount, setAmount] = useState('0');
 
-    const handlePresi = (amount: any) => {
-        return String(amount.toString().match(/^-?\d+(?:\.\d{0,4})?/)[0]);
-    }
 
     const percentAmount = (num: string) => {
         const amt = handlePresi((Number(shareBal) * Number(num) / 100).toString())
@@ -24,22 +24,29 @@ const FlexibleWithdraw = (props: Props) => {
     }
 
     const action = async () => {
-        if (amount > shareBal) {
+        if (Number(amount) > Number(shareBal)) {
             console.log('insufficent balance')
         } else {
+            const activityId = randomId();
+            regActivity(activityId);
             let finalAmount = handlePresi(amount);
             const result = await personal.withdrawFlexible(finalAmount);
             console.log(result, ' withdraw')
+            if (result.status) {
+                setAmount('0');
+                props.close();
+            }
+            regActivity(activityId);
         }
 
     }
 
     return (
         <FlexWithdraw>
-            <section>
+            <div>
                 <Labels>Share Balance</Labels>
-                <BoldInfo>{shareBal}</BoldInfo>
-            </section>
+                <BoldInfo className="uppercase">{shareBal} {personal.shareCurrency}</BoldInfo>
+            </div>
 
             <InputNumber
                 value={amount}
@@ -58,6 +65,7 @@ const FlexibleWithdraw = (props: Props) => {
 
             <div>
                 <ButtonStyle
+                    disabled={Number(amount) > Number(shareBal)}
                     primary
                     onClick={() => action()}>
                     <div>
@@ -76,6 +84,10 @@ export default FlexibleWithdraw;
 const FlexWithdraw = styled.div`
     display: block;
 
+    & > div {
+        margin-bottom: 30px;
+    }
+
     & ul {
         display: flex;
         width: 100%;
@@ -87,10 +99,15 @@ const FlexWithdraw = styled.div`
             justify-content: center;
 
             & button {
+                border: none;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 20px;
+                padding: 15px;
+                font-size: 1rem;
+                font-weight: 600;
+                color: ${p => p.theme.link};
+                background-color: transparent;
             }
         }
     }

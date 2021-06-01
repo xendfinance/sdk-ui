@@ -23,13 +23,15 @@ export default Navigation;
 
 
 const NavStyle = styled.section`
-    background-color: white;
+    position: relative;
+    z-index: 2;
+    background-color: ${p => p.theme.primary};
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 16px;
-    border-top: 1px solid #ececec;
-    box-shadow: 0 -1px 10px rgba(0,0,0,0.02);
+    border-top: 1px solid ${p => p.theme.border};
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.05);
 
     & .link-item {
         display: inline-block;

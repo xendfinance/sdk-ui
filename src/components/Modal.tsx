@@ -56,6 +56,7 @@ interface StyleProps {
 const ModalStyle = styled.div<StyleProps>`
     display: none;
     position: fixed;
+    z-index: -1;
     background-color: transparent;
     top: 0;
     left: 0;
@@ -63,7 +64,9 @@ const ModalStyle = styled.div<StyleProps>`
     height: 100%;
 
     & > div {
+        overflow-y: scroll;
         padding: 20px;
+        padding-bottom: 100px;
         position: relative;
         height: 100%;
         width: 100%;
@@ -75,6 +78,7 @@ const ModalStyle = styled.div<StyleProps>`
     ${({ open, show }) => open && css`
         display : block;
         background-color: white;
+        z-index: 3;
 
         & > div {
             ${show && css`
@@ -91,6 +95,14 @@ const ModalControl = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+
+    & p {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        letter-spacing: 2px;
+        font-weight: 600;
+    }
 
     & button {
         border:none;

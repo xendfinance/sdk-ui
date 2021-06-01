@@ -9,6 +9,7 @@ export const Labels = styled.div`
 
 export const BoldInfo = styled.p`
     font-weight: 600;
+    font-size: 1.2rem;
 `;
 
 
@@ -28,6 +29,7 @@ export const ButtonStyle = styled.button<ButtonProps>`
     height: 40px;
     margin: 10px 0;
 
+
     & > div {
         background-color: ${(p => p.primary ? "transparent" : "white")};
         border-radius: 40px;
@@ -38,4 +40,41 @@ export const ButtonStyle = styled.button<ButtonProps>`
         color: ${(p => p.primary ? "white" : "#333")};
     }
 
+    &:disabled {
+        cursor: not-allowed;
+        background: ${p => p.theme.disabledBtnBg};
+    }
+
+    &:disabled > div {
+        background-color: ${p => p.theme.disabledBtnBg};
+        color: ${p => p.theme.disableBtn}
+    }
+
+`;
+
+export const InputStyle = styled.div`
+
+    & input {
+        border:none;
+        display: block;
+        box-sizing: border-box;
+        width: 100% !important;
+        height: 40px;
+        font-size: 1.2rem;
+        border-radius: 38px;
+        border: 2px solid ${p => p.theme.border};
+        padding:10px 20px;
+        background-color: transparent;
+        color: #333;
+
+        &:focus {
+            outline: none;
+            border:2px solid ${p => p.theme.borderActive};
+        }
+    }
+`;
+
+type Space = { space: number }
+export const Spacer = styled.div<Space>`
+    height: ${p => p.space}px;
 `;

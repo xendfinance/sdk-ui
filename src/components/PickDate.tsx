@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Datepicker from 'react-datepicker';
 import moment from 'moment';
-import styled from 'styled-components';
+import { InputStyle } from './Styles';
 
 type Props = {
     value?: Date;
@@ -13,7 +13,7 @@ type Props = {
 
 const PickDate = (props: Props) => {
     const [date, setDate] = useState(new Date());
-    const { required, minDate, label } = props;
+    const { required, minDate } = props;
 
     useEffect(() => {
         if (props.value) {
@@ -23,8 +23,7 @@ const PickDate = (props: Props) => {
     }, [props.value])
 
     return (
-        <PickerStyle>
-            <div className="label">{label ? label : 'Pick Date'}</div>
+        <InputStyle>
             <Datepicker
                 selected={date}
                 dateFormat="d MMM, yyyy"
@@ -38,11 +37,9 @@ const PickDate = (props: Props) => {
                 required={required}
                 minDate={minDate}
             />
-        </PickerStyle>
+        </InputStyle>
     );
 }
 
 export default PickDate;
 
-
-const PickerStyle = styled.div``;

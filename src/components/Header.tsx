@@ -22,12 +22,13 @@ export default Header;
 
 
 const HeaderStyle = styled.section`
-    background-color: #fff;
+    position: relative;
+    background-color: ${p => p.theme.primary};
     padding: 15px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 50px 40px;
-    border-bottom: 1px solid #ececec;
+    border-bottom: 1px solid ${p => p.theme.border};
 
     & .topmost {
         display: flex;

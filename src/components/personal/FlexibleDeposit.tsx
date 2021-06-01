@@ -1,36 +1,49 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { regActivity } from "../../App";
 import { personal } from "../../methods/sdk";
+import { randomId } from "../../methods/utils";
 import InputNumber from "../InputNumber";
 import { BoldInfo, ButtonStyle, Labels } from "../Styles";
 
 interface Props {
     walletBalance: string
+    close: Function
 }
 
 const FlexibleDeposit = (props: Props) => {
 
-    const [amount, setAmount] = useState("0");
+    const [amount, setAmount] = useState('0');
 
     const percentAmount = (percent: string) => {
         let percentage = Number(percent) / 100;
-        setAmount((Number(props.walletBalance) * percentage).toFixed(2).toString())
+        setAmount((Number(props.walletBalance) * percentage).toString())
     }
 
     const submit = async () => {
-
-        const response = await personal.flexibleDeposit(amount);
-        console.log(response)
+        if (Number(amount) <= Number(props.walletBalance)) {
+            const id = randomId();
+            regActivity(id)
+            const response = await personal.flexibleDeposit(amount);
+            if (response.status) {
+                console.log('success')
+                setAmount('0');
+                props.close()
+            }
+            console.log(response)
+            regActivity(id)
+        }
     }
 
     return (
         <FlexDeposit>
             <div>
-                <BoldInfo>{Number(props.walletBalance).toFixed(2)}</BoldInfo>
                 <Labels>Wallet Balance</Labels>
+                <BoldInfo>{props.walletBalance} {personal.currency}</BoldInfo>
             </div>
 
             <InputNumber
+                placeholder="Enter Amount"
                 value={amount}
                 onChange={e => setAmount(e)} />
 
@@ -47,6 +60,7 @@ const FlexibleDeposit = (props: Props) => {
             <div>
                 <ButtonStyle
                     primary={true}
+                    disabled={Number(amount) > Number(props.walletBalance)}
                     onClick={() => submit()}>
                     <div>
                         <p>deposit</p>
@@ -63,6 +77,10 @@ export default FlexibleDeposit;
 const FlexDeposit = styled.div`
     display: block;
 
+    & > div {
+        margin-bottom: 30px;
+    }
+
     & ul {
         display: flex;
         width: 100%;
@@ -74,10 +92,15 @@ const FlexDeposit = styled.div`
             justify-content: center;
 
             & button {
+                border: none;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 20px;
+                padding: 15px;
+                font-size: 1rem;
+                font-weight: 600;
+                color: ${p => p.theme.link};
+                background-color: transparent;
             }
         }
     }

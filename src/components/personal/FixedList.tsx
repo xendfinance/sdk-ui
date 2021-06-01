@@ -1,50 +1,55 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { personal } from '../../methods/sdk';
 import { frmBigNum } from "../../methods/utils";
-import { BoldInfo, ButtonStyle, Labels } from "../Styles";
+import { BoldInfo, ButtonStyle, Labels, Spacer } from "../Styles";
 
-const FixedList = () => {
 
-    const [info, setInfo] = useState<Array<any>>([])
+interface Props {
+    info: Array<any>
+}
 
-    useEffect(() => {
-        (async () => {
-            const data = await personal.fixedInfo();
-            if (Array.isArray(data)) {
-                setInfo(data);
-            }
-        })();
-        //
-    }, [])
+const FixedList = (props: Props) => {
+
+
+    const { info } = props;
 
 
     return (
         <>
-            <p>All Fixed Savings Deposits</p>
+            {/* <p>All Fixed Savings Deposits</p> */}
 
             <ListItem>
                 {
-                    info.map((record, i) => (
-                        <section className="item" key={i}>
-                            <div>
+                    info.map((record, i) => {
+
+                        const hasWidthrawn = record.hasWithdrawn;
+                        const maturityDate = record.lockPeriodInSeconds;
+                        const maturityDateHasReached = moment().isAfter(moment.unix(maturityDate));
+
+                        const canWithdrawDeposit = !hasWidthrawn && maturityDateHasReached ? true : false;
+
+                        return (
+                            <section className="item" key={i}>
                                 <div>
-                                    <Labels>Amount Deposited</Labels>
-                                    <BoldInfo>{frmBigNum(record.amount)} {personal.currency}</BoldInfo>
+                                    <div>
+                                        <Labels>Amount Deposited</Labels>
+                                        <BoldInfo>{frmBigNum(record.amount)} {personal.currency}</BoldInfo>
+                                    </div>
+                                    <Spacer space={15} />
+                                    <div>
+                                        <Labels>Maturity Date</Labels>
+                                        <p>{moment.unix(record.lockPeriodInSeconds).format('ll')}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <Labels>Maturity Date</Labels>
-                                    <BoldInfo>{moment.unix(record.lockPeriodInSeconds).format('lll')}</BoldInfo>
-                                </div>
-                            </div>
-                            <ButtonStyle>
-                                <div>
-                                    <p>withdraw</p>
-                                </div>
-                            </ButtonStyle>
-                        </section>
-                    ))
+                                <ButtonStyle disabled={!canWithdrawDeposit}>
+                                    <div>
+                                        <p>withdraw</p>
+                                    </div>
+                                </ButtonStyle>
+                            </section>
+                        )
+                    })
                 }
             </ListItem>
         </>

@@ -4,45 +4,84 @@ import Info from "../Info";
 import { BoldInfo, ButtonStyle, Labels } from '../Styles';
 import { useEffect, useState } from 'react';
 import { ReactComponent as BUSD } from '../../resx/busd.svg';
-import { frmBigNum } from '../../methods/utils';
+import { frmBigNum, handlePresi, randomId } from '../../methods/utils';
 import Modal from '../Modal';
 import FlexibleDeposit from '../personal/FlexibleDeposit';
 import FlexibleWithdraw from '../personal/FlexibleWithdraw';
 import FixedDepo from '../personal/FixedDepo';
 import FixedList from '../personal/FixedList';
+import { notification, regActivity } from '../../App';
 
 function Personal() {
 
     const [wallet, setWallet] = useState("0");
-    const [flexibleInfo, setFlexibleInfo] = useState<any>({});
-    const [saveModal, setSaveModal] = useState(false);
-    const [withdrawModal, setWithdrawModal] = useState(false);
+
+    // fixed
+    const [fixedData, setFixedData] = useState<Array<any>>([])
     const [fixedDepoModal, setFixedDepoModal] = useState(false);
     const [fixedList, setFixedList] = useState(false);
 
+    // flexible
+    const [flexibleInfo, setFlexibleInfo] = useState<any>({});
+    const [saveModal, setSaveModal] = useState(false);
+    const [withdrawModal, setWithdrawModal] = useState(false);
+
+
+    const getWalletBalance = async () => {
+        const amount = await personal.walletBalance();
+        setWallet(handlePresi(amount));
+    }
+
+    const getFlexibleInfo = async () => {
+        const activityId = randomId();
+        regActivity(activityId)
+        const info = await personal.flexibleInfo();
+        setFlexibleInfo(info);
+        regActivity(activityId)
+    }
+
+    const getFixedInfo = async () => {
+
+        const data = await personal.fixedInfo();
+        if (Array.isArray(data)) {
+            setFixedData(data);
+        }
+    }
+
 
     useEffect(() => {
-
-        (async () => {
-            const amount = await personal.walletBalance();
-            setWallet(amount);
-            const info = await personal.flexibleInfo();
-            setFlexibleInfo(info);
-        })()
-
+        getWalletBalance();
+        getFlexibleInfo();
+        getFixedInfo();
     }, [])
+
+
+
+    const total = () => {
+        let balance = 0;
+        fixedData.forEach((list: any) => {
+            if (!list.hasWithdrawn) {
+                balance += Number(list.derivativeBalance);
+            }
+        });
+        return frmBigNum(balance, 'venus');
+    }
 
     return (
         <>
             <CardStyle>
-                {/* <p>flexible savings</p> */}
+
+                <SectionHeader>
+                    <p>flexible savings</p>
+                </SectionHeader>
+
                 <section>
                     <div>
                         <Labels>
                             <p>Share Balance</p>
                             <Info />
                         </Labels>
-                        <BoldInfo>{frmBigNum(flexibleInfo.shareBalance, 'venus')} {personal.shareCurrency}</BoldInfo>
+                        <BoldInfo className="uppercase">{frmBigNum(flexibleInfo.shareBalance, 'venus')} {personal.shareCurrency}</BoldInfo>
                     </div>
                 </section>
                 <FlexibleActions>
@@ -59,38 +98,48 @@ function Personal() {
                             </Labels>
                         </div>
                     </div>
-                    <div></div>
+                    <div>
+                        <button onClick={() => notification('success', 'totally worth' + Date.now())}>notify</button>
+                    </div>
                     <div>
                         <Labels>
                             <p>Wallet Balance</p>
                         </Labels>
-                        <BoldInfo>{Number(wallet).toFixed(2)} {personal.currency}</BoldInfo>
+                        <BoldInfo>{wallet} {personal.currency}</BoldInfo>
                     </div>
                     <div>
                         <Labels>
                             <p>Savings Balance</p>
                         </Labels>
-                        <BoldInfo>{(Number(flexibleInfo.balance) * 10 ** 18).toFixed(4)}</BoldInfo>
+                        <BoldInfo>{(handlePresi(Number(flexibleInfo.balance) * 10 ** 18))}</BoldInfo>
                     </div>
-                    <ButtonStyle primary onClick={() => setSaveModal(true)}>
-                        <div>
-                            <p>save</p>
-                        </div>
-                    </ButtonStyle>
-                    <ButtonStyle onClick={() => setWithdrawModal(true)}>
-                        <div>
-                            <p>withdraw</p>
-                        </div>
-                    </ButtonStyle>
+                    <section>
+                        <ButtonStyle primary onClick={() => setSaveModal(true)}>
+                            <div>
+                                <p>save</p>
+                            </div>
+                        </ButtonStyle>
+                    </section>
+                    <section>
+                        <ButtonStyle onClick={() => setWithdrawModal(true)}>
+                            <div>
+                                <p>withdraw</p>
+                            </div>
+                        </ButtonStyle>
+                    </section>
                 </FlexibleActions>
             </CardStyle>
 
 
 
             <CardStyle>
-                <p>fixed savings</p>
-                <Labels>Share Balance</Labels>
-                <p>{200}</p>
+
+                <SectionHeader>
+                    <p>fixed savings</p>
+                </SectionHeader>
+
+                <Labels>Savings Balance</Labels>
+                <BoldInfo className="uppercase">{total()} {personal.shareCurrency}</BoldInfo>
 
                 <FixedActions>
                     <div className="coin">
@@ -113,7 +162,9 @@ function Personal() {
                     </ButtonStyle>
                 </FixedActions>
                 <div>
-                    <button onClick={() => setFixedList(true)}>view fixed deposits</button>
+                    <button
+                        className="view-deposit"
+                        onClick={() => setFixedList(true)}>view fixed deposits</button>
                 </div>
             </CardStyle>
 
@@ -121,35 +172,54 @@ function Personal() {
 
 
             <Modal
-                title="Deposit"
+                title="Deposit in Flexible Savings"
                 close={() => setSaveModal(false)}
                 visible={saveModal}>
-                <FlexibleDeposit walletBalance={wallet} />
+                <FlexibleDeposit
+                    walletBalance={wallet}
+                    close={() => {
+                        getWalletBalance();
+                        setSaveModal(false);
+                        getFlexibleInfo();
+                    }} />
             </Modal>
 
             {/* Flexible Withdraw */}
             <Modal
-                title="Withdraw"
+                title="Withdraw From Flexible Savings"
                 visible={withdrawModal}
                 close={() => setWithdrawModal(false)}>
-                <FlexibleWithdraw shareBalance={flexibleInfo.shareBalance} />
+                <FlexibleWithdraw
+                    shareBalance={flexibleInfo.shareBalance}
+                    close={() => {
+                        getWalletBalance();
+                        setWithdrawModal(false);
+                        getFlexibleInfo();
+                    }} />
             </Modal>
 
             {/* Fixed Deposit */}
             <Modal
-                title="Fixed Deposit"
+                title="Save on Fixed Savings"
                 visible={fixedDepoModal}
                 close={() => setFixedDepoModal(false)}>
-                <FixedDepo walletBalance={wallet} />
+                <FixedDepo
+                    close={() => {
+                        getFixedInfo();
+                        getWalletBalance();
+                        setFixedDepoModal(false);
+                    }}
+                    walletBalance={wallet} />
             </Modal>
 
             {/* Withdraw Fixed Deposit */}
             <Modal
-                title="Withdraw Deposits"
+                title="Withdraw From Fixed Savings"
                 visible={fixedList}
                 close={() => setFixedList(false)}>
                 <div>
-                    <FixedList />
+                    <FixedList
+                        info={fixedData} />
                 </div>
             </Modal>
 
@@ -161,13 +231,24 @@ export default Personal;
 
 
 const CardStyle = styled.section`
-    background-color: #fff;
+    background-color: ${p => p.theme.primary};
+    color: ${p => p.theme.font};
     padding: 20px;
     margin-bottom: 15px;
+
+    & .view-deposit {
+        border:none;
+        background-color: transparent;
+        text-transform: capitalize;
+        font-size: 1rem;
+        text-decoration: dotted;
+        color: ${p => p.theme.link};
+        font-weight: 500;
+    }
 `;
 
 const FlexibleActions = styled.section`
-    margin-top: 25px;
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: repeat(3, auto);
@@ -192,6 +273,7 @@ const FlexibleActions = styled.section`
 `;
 
 const FixedActions = styled.section`
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: repeat(3, auto);
@@ -207,4 +289,15 @@ const FixedActions = styled.section`
             margin-left: 5px;
         }
     }
+`;
+
+
+const SectionHeader = styled.div`
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: right;
 `;

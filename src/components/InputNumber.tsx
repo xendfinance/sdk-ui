@@ -1,6 +1,7 @@
 import Cleave from 'cleave.js/react';
 import { CleaveOptions } from 'cleave.js/options';
-import styled from 'styled-components';
+import { InputStyle } from './Styles';
+
 
 type Props = {
     placeholder?: string;
@@ -41,25 +42,3 @@ const InputNumber = (props: Props) => {
 }
 
 export default InputNumber;
-
-const InputStyle = styled.div`
-
-    & input {
-        border:none;
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        height: 50px;
-        font-size: 1.2rem;
-        border-radius: 38px;
-        border: 2px solid #333;
-        padding:10px 20px;
-        background-color: transparent;
-        color: #333;
-
-        &:focus {
-            outline: none;
-            border:2px solid #2042B8;
-        }
-    }
-`;
