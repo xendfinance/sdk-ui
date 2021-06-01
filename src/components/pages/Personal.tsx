@@ -98,9 +98,7 @@ function Personal() {
                             </Labels>
                         </div>
                     </div>
-                    <div>
-                        <button onClick={() => notification('success', 'totally worth' + Date.now())}>notify</button>
-                    </div>
+                    <div></div>
                     <div>
                         <Labels>
                             <p>Wallet Balance</p>
