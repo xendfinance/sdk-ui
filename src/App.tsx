@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import EE from 'event-emitter';
 import Theme from './theme/ThemeContext';
 import styled, { css } from 'styled-components';
-import Header from './components/Header';
+
+import EsusuContributions from './components/esusu/EsusuContributions';
+import Cooperative from './components/pages/Cooperative';
+import EsusuJoin from './components/esusu/EsusuJoin';
+import Personal from './components/pages/Personal';
 import Navigation from './components/Navigation';
 import Esusu from './components/pages/Esusu';
-import Personal from './components/pages/Personal';
-import EE from 'event-emitter';
-import { useState } from 'react';
+import Header from './components/Header';
 
 
 const emitter = EE();
@@ -77,7 +81,7 @@ function App() {
     }
   }
 
-
+  const [heading, setHeading] = useState('');
   return (
     <Theme>
       <NotificationBox show={state.show}>
@@ -85,17 +89,30 @@ function App() {
       </NotificationBox>
       <BrowserRouter>
         <Wrapper activity={loading()}>
-          <Header />
+          <Header heading={heading} />
           <Loader activity={loading()}>
             <p>Loading</p>
           </Loader>
           <main>
             <Switch>
-              <Route exact path="/personal" component={Personal} />
-              <Route exact path="/esusu" component={Esusu} />
+              <Route exact path="/personal">
+                <Personal />
+              </Route>
+              <Route exact path="/esusu">
+                <Esusu />
+              </Route>
+              <Route exact path="/cooperative">
+                <Cooperative />
+              </Route>
+              <Route exact path='/esusu-contributions'>
+                <EsusuContributions />
+              </Route>
+              <Route exact path='/esusu-join'>
+                <EsusuJoin />
+              </Route>
             </Switch>
           </main>
-          <Navigation />
+          <Navigation setHeading={setHeading} heading={heading} />
         </Wrapper>
       </BrowserRouter>
     </Theme>

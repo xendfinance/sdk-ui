@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import Address from './Address';
 import SwitchProtocols from './SwitchProtocols';
 
-const Header = () => {
+const Header = ({heading}:any) => {
 
     return (
         <HeaderStyle>
             <section className="topmost">
-                <p className="title">Personal Savings</p>
+                <p className="title">{heading}</p>
                 <Address />
             </section>
             <section className="switch-protocols">

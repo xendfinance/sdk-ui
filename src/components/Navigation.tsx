@@ -1,20 +1,36 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ReactComponent as PersonalActiveIcon } from '../resx/personal-active.svg';
+import { ReactComponent as EsusuActiveIcon } from '../resx/esusu-active.svg';
+import { ReactComponent as CooperativeActiveIcon } from '../resx/cooperative-active.svg';
 import { ReactComponent as PersonalIcon } from '../resx/personal.svg';
+import { ReactComponent as EsusuIcon } from '../resx/esusu.svg';
+import { ReactComponent as CooperativeIcon } from '../resx/cooperative.svg';
 
-const Navigation = () => {
+const Navigation = ({ heading, setHeading }: any) => {
+    const handleHeadings = ( param : string ) => {
+        setHeading(param);
+    }
     return (
         <NavStyle>
-            <div className="items">
-                <Link to="/personal" className="link-item">
-                    <PersonalIcon />
-                    <p>Personal</p>
+            <div className='items'>
+                <Link onClick={() => handleHeadings('Personal Savings')} to='/personal' className='link-item'>
+                    { heading !== 'Personal Savings' ? <PersonalIcon /> : <PersonalActiveIcon />}
+                    <p className={ heading !== 'Personal Savings' ? 'inactive' : 'active' }>Personal</p>
                 </Link>
+                <Link onClick={() => handleHeadings('Esusu')} to='/esusu' className='link-item'>
+                    { heading !== 'Esusu' ? <EsusuIcon /> : <EsusuActiveIcon />}
+                    <p className={ heading !== 'Esusu' ? 'inactive' : 'active' }>ESUSU</p>
+                </Link>
+                <Link onClick={() => handleHeadings('Cooperative')} to='/cooperative' className='link-item'>
+                    { heading !== 'Cooperative' ? <CooperativeIcon /> : <CooperativeActiveIcon />}
+                    <p className={ heading !== 'Cooperative' ? 'inactive' : 'active' }>Cooperative</p>
+                </Link>
+                <button className='more'>
+                    <i className='fas fa-ellipsis-h'></i>
+                    <p>More</p>
+                </button>
             </div>
-            <button className="more">
-                <i className="fas fa-ellipsis-h"></i>
-                <p>More</p>
-            </button>
         </NavStyle>
     )
 }
@@ -33,13 +49,29 @@ const NavStyle = styled.section`
     border-top: 1px solid ${p => p.theme.border};
     box-shadow: 0 -1px 10px rgba(0,0,0,0.05);
 
-    & .link-item {
-        display: inline-block;
-        font-size: 0.8rem;
-        text-align: center;
-        text-decoration: none;
+    & .items {
+        display:flex;
+        flex:1;
+        justify-content:space-between;
+        & .link-item {
+            align-self:center;
+            display: inline-block;
+            font-size: 0.8rem;
+            text-align: center;
+            text-decoration: none;
+            & .active {
+                font-weight:500;
+                background: linear-gradient(95.81deg, #2042B8 -4.73%, #FF6600 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            & .inactive {
+                color:#9E9E9E;
+                font-weight:500;
+            }
+        }
     }
-
     & .more {
         border:none;
         background-color: transparent;
