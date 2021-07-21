@@ -13,11 +13,6 @@ const EsusuEstimate = () => {
                     <Box className='h3' component='article'>Accumulated Interest</Box>
                     <Box mt={2} className='h1' component='article'>0.00230000 XEND</Box>
                 </Box>
-                {/* <Box className='result'>
-                    <Box className='h11' component='article'>Today’s Interest Earned</Box>
-                    <Box className='h5' component='article'>0.00000040 BTC</Box>
-                    <Box className='h11' component='article'>= $0.68</Box>
-                </Box> */}
             </Box>
         </EstimateContainer>
     )

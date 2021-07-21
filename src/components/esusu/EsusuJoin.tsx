@@ -1,11 +1,11 @@
 import { useHistory } from 'react-router';
 import { Button, Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { baseUrl } from '../../constants';
 
+import { baseUrl } from '../../constants';
 import { InputFigure } from '../inputfields';
 
-const EsusuJoin = ({ }: any) => {
+const EsusuJoin = () => {
     const history = useHistory();
     const handleBackToMain = () => {
         history.push('/esusu');
@@ -72,7 +72,6 @@ const EsusuContainer = styled.div`
     & * {
         color         : grey;
         text-transform: none;
-        font-weight   : 400 !important;
     }
     height        : 100%;
     max-height    : 100%;

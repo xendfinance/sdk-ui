@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Button, Box, Tab, Tabs } from '@material-ui/core';
-import { baseUrl } from '../../constants';
 import styled from 'styled-components';
 
+import { baseUrl } from '../../constants';
 import EsusuEstimate from './EsusuEstimate';
 
 interface TabPanelProps {
@@ -13,7 +13,7 @@ interface TabPanelProps {
     value: any;
 }
 
-function TabPanel(props: TabPanelProps) {
+const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, className, ...other } = props;
 
     return (
@@ -32,13 +32,13 @@ function TabPanel(props: TabPanelProps) {
         </div>
     );
 }
-function a11yProps(index: any) {
+const a11yProps = (index: any) => {
     return {
         id: `scrollable-auto-tab-${index}`,
         'aria-controls': `scrollable-auto-tabpanel-${index}`,
     };
 }
-const EsusuContributions = ({ }: any) => {
+const EsusuContributions = () => {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -116,7 +116,6 @@ const EsusuContainer = styled.div`
     & * {
         color         : grey;
         text-transform: none;
-        font-weight   : 400 !important;
     }
     height        : 100%;
     max-height    : 100%;
@@ -124,9 +123,9 @@ const EsusuContainer = styled.div`
     position      : relative;
     flex          : 1;
     padding-top   : 10px;
-    padding-left  : 5% !important;
+    padding-left  : 1% !important;
     padding-bottom: 100px;
-    padding-right : 5% !important;
+    padding-right : 1% !important;
 
     .save-groups {
         padding: 20px 38px;
@@ -151,6 +150,10 @@ const EsusuContainer = styled.div`
             }
             .MuiTab-root:nth-child(1) .MuiTab-wrapper {
                 transform: translate(-10px, 0px);
+            }
+
+            * {
+                font-weight   : 400;
             }
 
             .Mui-selected {

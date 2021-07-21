@@ -2,13 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { AddCircleOutlineOutlined, ExpandMore } from '@material-ui/icons';
 import { Box, Button } from '@material-ui/core';
-import { InputSearch } from '../inputfields';
-import { ModalEsusuNew } from '../modals';
 import styled from 'styled-components';
 
+import { InputSearch } from '../inputfields';
+import { ModalEsusuNew } from '../modals';
 import EsusuEstimate from '../esusu/EsusuEstimate';
 
-const Esusu = ({ }: any) => {
+const Esusu = () => {
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
 
@@ -37,7 +37,7 @@ const Esusu = ({ }: any) => {
             </Box>
             <EsusuEstimate />
             <Box mt={4} mb={4} className='mode-container'>
-                <InputSearch placeholder='Search Esusu Groups' type={2} />
+                <InputSearch placeholder='Search Esusu Groups' type={2} iconSize={10.14} fontSize='h9' />
                 <Box ml={2} className='h11' component='span'>
                     Filter:
                 </Box>
@@ -149,7 +149,7 @@ const EsusuContainer = styled.div`
     & * {
         color         : grey;
         text-transform: none;
-        font-weight   : 400;
+        font-weight   : 500 !important;
     }
     height        : 100%;
     max-height    : 100%;
@@ -210,8 +210,8 @@ const EsusuContainer = styled.div`
     & .create-group {
         padding: 3px 4px !important;
         & .MuiSvgIcon-root {
-            width:14.03px;
-            height:14.03px;
+            width:13.23px;
+            height:13.23px;
             fill: white;
         }
 
