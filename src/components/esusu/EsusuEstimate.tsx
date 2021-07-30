@@ -4,15 +4,12 @@ import styled from 'styled-components';
 const EsusuEstimate = () => {
     return (
         <EstimateContainer className='paper'>
-            <Box className='results' mb={2}>
-                <Box className='result'>
-                    <Box className='h3' component='article'>Share Balance</Box>
-                    <Box mt={2} className='h1' component='article'>0.00230000 DAI</Box>
+            <Box className='est-root'>
+                <Box>
+                    <Box component='span' className='h1' mr={1}>Estimated Portfolio Balance</Box>
+                    <i className='far fa-question-circle' aria-hidden='true'></i>
                 </Box>
-                <Box className='result'>
-                    <Box className='h3' component='article'>Accumulated Interest</Box>
-                    <Box mt={2} className='h1' component='article'>0.00230000 XEND</Box>
-                </Box>
+                <Box mt={0.5}>0.0000 BUSD</Box>
             </Box>
         </EstimateContainer>
     )
@@ -22,32 +19,26 @@ export default EsusuEstimate;
 
 const EstimateContainer = styled.div`
     & * {
-        font-weight   : 500 !important;
+        font-weight   : 400 !important;
     }
     display       : flex;
     flex-direction: column;
     margin-top:24px;
-    padding: 20px 10px;
+    padding: 20px 40px;
 
-    & .results {
-        padding-left   : 6%;
-        padding-right  : 6%;
-        display        : flex;
-        flex-wrap:wrap;
-        justify-content: space-between;
-
-        & div {
-            article:nth-child(1) {
-                color: #9E9E9E;
+    & .est-root {
+        display:flex;
+        flex-direction: column;
+        & >div:first-of-type {
+            color: rgb(121,121,121);
+            & >i {
+                font-size: 15px;
+                color: rgb(255,102,0);
             }
-
-            article:nth-child(2) {
-                color      : black;
-            }
-
-            article:nth-child(3) {
-                color: #A2A2A2;
-            }
+        }
+        & >div:last-of-type {
+            color: rgb(54,54,54);
+            font-weight: 700 !important;
         }
     }
 `;

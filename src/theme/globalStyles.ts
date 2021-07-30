@@ -209,6 +209,14 @@ table {
 	display      : inline-block;
   }
   
+  .btn-primary {
+	background: white;
+	border-radius:25px;
+	border:1px solid rgb(32,66,184);
+	padding:10px 18px;
+	cursor:pointer;
+  }
+
   .sunset-outlined {
 	background   : linear-gradient(to right, #2042B8, #FF6600);
 	border-radius: 25px;

@@ -5,8 +5,10 @@ import styled from 'styled-components';
 
 import { InputSearch } from '../inputfields';
 import { ModalCooperativeNewGroup } from '../modals';
-import { baseUrl } from '../../constants';
 import EsusuEstimate from '../esusu/EsusuEstimate';
+
+import Coin1 from '../../assets/images/personal/coin1.png';
+import Coin2 from '../../assets/images/personal/coin2.png';
 
 const Cooperative = () => {
     const [open, setOpen] = React.useState(false);
@@ -49,7 +51,7 @@ const Cooperative = () => {
             </Box>
             <Box className='paper group'>
                 <Box className='group-img'>
-                    <img alt='' src={baseUrl + 'personal/coin2.png'} />
+                    <Box component='img' {...{alt:''}} {...{src:Coin2}} />
                     <Box ml={1.5} className='group-info'>
                         <Box className='h19 group-name'>John Esusu</Box>
                         <Box className='h20' mt={0.75}>Tether USD</Box>
@@ -70,7 +72,7 @@ const Cooperative = () => {
             </Box>
             <Box mt={2} className='paper group'>
                 <Box className='group-img'>
-                    <img alt='' src={baseUrl + 'personal/coin1.png'} />
+                    <Box component='img' {...{alt:''}} {...{src:Coin1}} />
                     <Box ml={1.5} className='group-info'>
                         <Box className='h19 group-name'>Farmers Saving Union</Box>
                         <Box className='h20' mt={0.75}>Tether USD</Box>

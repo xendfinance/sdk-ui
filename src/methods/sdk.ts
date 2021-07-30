@@ -2,10 +2,10 @@
 import XF, { Personal, Esusu, Cooperative } from '@xend-finance/web-sdk';
 
 
-const chainId = 56;
+const chainId = 97;
 const privateKey: any = process.env.REACT_APP_PK;
 const options = {
-    env: "mainnet"
+    env: "testnet"
 }
 
 export const personal = new Personal(chainId, privateKey, options);

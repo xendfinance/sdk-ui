@@ -3,8 +3,9 @@ import { Modal, Box, Backdrop, Button, Fade, IconButton } from '@material-ui/cor
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { HighlightOffOutlined } from '@material-ui/icons';
 
-import { ModalMintSuccess } from '..';
+import { esusu } from '../../../methods/sdk';
 import { InputMinting } from '../../inputfields';
+import { GROUP_NAME, SYMBOL_NAME } from '../../inputfields/config';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
                 },
 
                 '& .create-cooperative': {
-                    padding: '0px 30px',
 
                     '& button': {
                         padding: '5px 10px',
@@ -79,17 +79,19 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function ModalCooperativeNewGroup({ setOpen, open }: any) {
+export default function ModalEsusuNewGroup({ setOpen, open, init }: any) {
 
+    const [name, setName] = React.useState('');
+    const [symbol, setSymbol] = React.useState('');
     const classes = useStyles();
-    const [successOpen, setSuccessOpen] = React.useState(false);
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleCreateGroup = () => {
-        setSuccessOpen(true);
+    const handleCreateGroup = async () => {
         setOpen(false);
+        await esusu.createGroup(name, symbol);
+        init(true);
     }
     return (
         <>
@@ -113,30 +115,29 @@ export default function ModalCooperativeNewGroup({ setOpen, open }: any) {
                             </IconButton>
                         </Box>
                         <Box className='header'>
-                            <Box className='h21 title'>Create Cooperative</Box>
+                            <Box className='h21 title'>Create Esusu Group</Box>
                             <Box className='separator'></Box>
                         </Box>
                         <Box mt={3} className='data-form h23'>
                             <Box className='data-label' mb={1}>Group Name</Box>
-                            <InputMinting placeholder='Eg. Real estate loan' />
+                            <InputMinting inputType={GROUP_NAME} setName={setName} placeholder='' />
                         </Box>
                         <Box mt={2} className='data-form h23'>
-                            <Box className='data-label' mb={1}>Create Symbol</Box>
-                            <InputMinting placeholder='Eg. SDz' />
+                            <Box className='data-label' mb={1}>Group Symbol</Box>
+                            <InputMinting inputType={SYMBOL_NAME} setSymbol={setSymbol} placeholder='' />
                         </Box>
-                        <Box mt={1.5} ml={2} className='data-form h7'>
+                        <Box mt={1.5} ml={2} className='data-form h4'>
                             A three letter unique indentifier for the Group
                         </Box>
                         <Box className='footer text-center' mt={5} mb={1}>
                             <Box mt={2.5} className='actions'></Box>
                             <Box className='sunset-contained create-cooperative'>
-                                <Button className='h22' onClick={() => handleCreateGroup()}>Create Cooperative group</Button>
+                                <Button className='h22' onClick={() => handleCreateGroup()}>Create Esusu Group</Button>
                             </Box>
                         </Box>
                     </Box>
                 </Fade>
             </Modal>
-            <ModalMintSuccess type='cooperative' successOpen={successOpen} setSuccessOpen={setSuccessOpen} />
         </>
     );
 }

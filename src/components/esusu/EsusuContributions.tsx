@@ -3,8 +3,8 @@ import { useHistory } from 'react-router';
 import { Button, Box, Tab, Tabs } from '@material-ui/core';
 import styled from 'styled-components';
 
-import { baseUrl } from '../../constants';
 import EsusuEstimate from './EsusuEstimate';
+import BackIcon from '../../assets/images/esusu/left-arrow.png';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -53,7 +53,7 @@ const EsusuContributions = () => {
         <EsusuContainer>
             <Box className='right-action'>
                 <Button className='primary-outlined h11' variant='outlined' onClick={() => handlePrevStep()}>
-                    <Box component='span'><img alt='' src={baseUrl + 'esusu/left-arrow.png'} /></Box>
+                    <Box component='span'><Box component='img' {...{alt:''}} {...{src:BackIcon}} /></Box>
                     <Box ml={4} component='span'>Back</Box>
                 </Button>
             </Box>

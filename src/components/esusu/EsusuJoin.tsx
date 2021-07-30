@@ -2,8 +2,8 @@ import { useHistory } from 'react-router';
 import { Button, Box } from '@material-ui/core';
 import styled from 'styled-components';
 
-import { baseUrl } from '../../constants';
 import { InputFigure } from '../inputfields';
+import BackIcon from '../../assets/images/esusu/left-arrow.png';
 
 const EsusuJoin = () => {
     const history = useHistory();
@@ -17,7 +17,7 @@ const EsusuJoin = () => {
         <EsusuContainer>
             <Box className='right-action'>
                 <Button className='primary-outlined h11' variant='outlined' onClick={() => handleBackToMain()}>
-                    <Box component='span'><img alt='' src={baseUrl + 'esusu/left-arrow.png'} /></Box>
+                    <Box component='span'><Box component='img' {...{alt:''}} {...{src:BackIcon}} /></Box>
                     <Box ml={4} component='span'>Back</Box>
                 </Button>
             </Box>

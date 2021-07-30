@@ -11,6 +11,9 @@ import Personal from './components/pages/Personal';
 import Navigation from './components/Navigation';
 import Esusu from './components/pages/Esusu';
 import Header from './components/Header';
+import EsusuGroup from './components/pages/Esusu/EsusuGroup';
+import EsusuCycle from './components/pages/Esusu/EsusuCycle';
+import EsusuCycleJoin from './components/pages/Esusu/EsusuCycleJoin';
 
 
 const emitter = EE();
@@ -29,6 +32,7 @@ function App() {
 
   let timeout: any = null;
   const [activities, setActivites] = useState<Array<string>>([])
+
   const [state, setState] = useState({
     show: false,
     message: "",
@@ -110,6 +114,11 @@ function App() {
               <Route exact path='/esusu-join'>
                 <EsusuJoin />
               </Route>
+              <Route exact path='/esusu/groups'>
+                <EsusuGroup />
+              </Route>
+              <Route exact path='/esusu/group/:id' render={(props) => <EsusuCycle {...props} />}/>
+              <Route exact path='/esusu/join/:id' render={(props) => <EsusuCycleJoin {...props} />}/>
             </Switch>
           </main>
           <Navigation setHeading={setHeading} heading={heading} />

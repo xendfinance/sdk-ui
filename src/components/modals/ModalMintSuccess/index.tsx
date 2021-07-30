@@ -3,7 +3,7 @@ import { Modal, Box, Backdrop, Button, Fade, IconButton } from '@material-ui/cor
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { HighlightOffOutlined } from '@material-ui/icons';
 
-import { baseUrl } from '../../../constants';
+import Welcome from '../../../assets/images/esusu/confetti.png';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -99,7 +99,7 @@ export default function ModalMintSuccess({ setSuccessOpen, successOpen, type }: 
                     <Fade in={successOpen}>
                         <Box className='add-success-container h10 text-center'>
                             <Box>
-                                <img width={100} alt='' src={baseUrl + 'esusu/confetti.png'} />
+                                <Box component='img' width='100px' {...{alt:''}} {...{src:Welcome}} />
                             </Box>
                             <Box className='msg-type h25' mt={5}>Success!!!</Box>
                             <Box className='msg-content h26' mt={3}>
@@ -144,7 +144,7 @@ export default function ModalMintSuccess({ setSuccessOpen, successOpen, type }: 
                                 </IconButton>
                             </Box>
                             <Box>
-                                <img width={100} alt='' src={baseUrl + 'esusu/confetti.png'} />
+                                <Box component='img' width='100px' {...{alt:''}} {...{src:Welcome}} />
                             </Box>
                             <Box className='msg-type h25' mt={5}>Success!!!</Box>
                             <Box className='msg-content h26' mt={3}>
