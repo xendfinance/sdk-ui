@@ -7,7 +7,7 @@ import { esusu } from '../../../methods/sdk';
 import { ModalEsusuNewGroup } from '../../modals';
 
 import GroupIcon from '../../icons/GroupIcon';
-import BackIcon from '../../../assets/images/esusu/left-arrow.png';
+import BackIcon from '../../../assets/images/common/left-arrow.png';
 
 const EsusuGroup = () => {
     const history = useHistory();
@@ -42,6 +42,9 @@ const EsusuGroup = () => {
     React.useEffect(() => {
         let mounted = true;
         init(mounted);
+        return () => {
+            mounted = false
+        };
     }, []);
 
     return (

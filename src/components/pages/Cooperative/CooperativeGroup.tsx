@@ -4,48 +4,41 @@ import { Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
 import { esusu } from '../../../methods/sdk';
-import { ModalEsusuNewCycle } from '../../modals';
+import { ModalCooperativeNewGroup } from '../../modals';
 
 import GroupIcon from '../../icons/GroupIcon';
 import BackIcon from '../../../assets/images/common/left-arrow.png';
-import BUSDIcon from '../../../assets/images/personal/coin1.png';
 
-import { monthNames } from '../../../months';
-
-interface GroupInfo {
-    groupName: string;
-}
-
-const EsusuCycle = ({ match }: any) => {
+const CooperativeGroup = () => {
     const history = useHistory();
-    const [curGroup, setCurGroup] = React.useState<GroupInfo>({ groupName: '' });
-    const [cycles, setCycles] = React.useState([]);
+    const [totalCycleLen, setTotalCycleLen] = React.useState([]);
+    const [groups, setGroups] = React.useState([]);
     const [open, setOpen] = React.useState(false);
 
-    const handleJoinCycle = (id: any) => {
-        history.push(`/esusu/join/${id}`);
-    }
-    const handleCreateCycle = () => {
+    const handleCreateGroup = () => {
         setOpen(true);
+    };
+    const handleShowCycles = (gId: any) => {
+        history.push(`/cooperative/group/${gId}`);
     };
     const handleGoBack = () => {
         history.goBack();
     }
     const init = async (mounted:any) => {
         const groups: any = await esusu.getGroups();
-        const cycles: any = await esusu.cyclesInGroup(match.params.id);
+
+        let totalCycleLengths: any = [];
+        for (let i = 0; i < groups.length; i++) {
+            const cycles: any = await esusu.cyclesInGroup(groups[i][0]);
+            totalCycleLengths.push(cycles.length);
+        }
 
         if(mounted) {
-            if(groups.length > 0)
-                localStorage.setItem('curGroupName',groups.filter((each: any) => each[0] === match.params.id)[0][1]);
-
-            setCurGroup(groups.filter((each: any) => each[0] === match.params.id)[0]);
-            setCycles(cycles);
+            setGroups(groups);
+            setTotalCycleLen(totalCycleLengths);
         }
     }
-    const returnDateFormat = (date: any) => {
-        return (monthNames[date.getMonth()]) + ' ' + date.getDate() + ', ' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ' ' + (date.getHours() >= 12 ? 'pm' : 'am');
-    }
+
     React.useEffect(() => {
         let mounted = true;
         init(mounted);
@@ -53,6 +46,7 @@ const EsusuCycle = ({ match }: any) => {
             mounted = false
         };
     }, []);
+
     return (
         <Container>
             <Box className='right-action'>
@@ -62,42 +56,31 @@ const EsusuCycle = ({ match }: any) => {
                 </Box>
             </Box>
             <Box className='group-action' mt={3}>
-                <Box className='h1'>{localStorage.getItem('curGroupName')}</Box>
-                <Box className='sunset-contained create-esusu'>
-                    <Button className='h3' onClick={() => handleCreateCycle()}>Create Cycle</Button>
+                <Box className='h1'>My Cooperative Groups</Box>
+                <Box className='sunset-contained create-cooperative'>
+                    <Button className='h3' onClick={() => handleCreateGroup()}>Create Cooperative Group</Button>
                 </Box>
             </Box>
             <Box className='group-card-container' mt={3}>
-                {cycles.map((each: any, i) => {
+                {groups.map((each: any, i) => {
                     return (
                         <Box key={i} className='paper'>
                             <Box>
-                                <Box>
-                                    <GroupIcon gName='tgp' bgColor='rgb(28,72,154)' fontColor='white' />
-                                    <Box component='img' {...{ src: BUSDIcon }} width='40px' height='40px' />
-                                </Box>
+                                <GroupIcon gName='tgp' fullName={each[1]} bgColor='rgb(28,72,154)' fontColor='white' />
                             </Box>
-                            <Box mt={4} mb={5} >
+                            <Box mt={3} mb={5} pl={3} pr={1}>
                                 <Box>
-                                    <Box>Deposit Amount</Box>
-                                    <Box><Box component='span'>{each.DepositAmount / Math.pow(10, 18)}</Box> BUSD</Box>
+                                    <Box>Total</Box>
+                                    <Box>Active</Box>
                                 </Box>
                                 <Box>
-                                    <Box>Payout interval Per Member</Box>
-                                    <Box>{each.PayoutIntervalSeconds} secs</Box>
-                                </Box>
-                                <Box>
-                                    <Box>Estimated APY</Box>
-                                    <Box className='cycle-status'>up to 15%</Box>
-                                </Box>
-                                <Box>
-                                    <Box>Start Date</Box>
-                                    <Box>{returnDateFormat(new Date(parseInt(each[9])))}</Box>
+                                    <Box>{totalCycleLen[i]}</Box>
+                                    <Box>0</Box>
                                 </Box>
                             </Box>
                             <Box>
                                 <Box className='sunset-outlined'>
-                                    <Button className='h1' variant='outlined' onClick={() => handleJoinCycle(each.CycleId)}>
+                                    <Button className='h1' variant='outlined' onClick={() => handleShowCycles(each[0])}>
                                         Open
                                     </Button>
                                 </Box>
@@ -106,13 +89,13 @@ const EsusuCycle = ({ match }: any) => {
                     );
                 })}
             </Box>
-            <ModalEsusuNewCycle open={open} setOpen={setOpen} curGroup={curGroup} init={init} />
+            <ModalCooperativeNewGroup open={open} setOpen={setOpen} init={init}/>
             <Box p={9}></Box>
         </Container>
     )
 }
 
-export default EsusuCycle;
+export default CooperativeGroup;
 
 const Container = styled.div`
     line-height: 1;
@@ -149,7 +132,7 @@ const Container = styled.div`
             font-size:18px !important;
         }
         
-        &>.create-esusu {
+        &>.create-cooperative {
             &>button {
                 padding: 3px 20px !important;
 
@@ -164,32 +147,27 @@ const Container = styled.div`
         &>.paper {
             display: flex;
             flex-direction: column;
-            >div:first-of-type div {
-                display: flex;
-                justify-content: space-between;
-            }
             >div:nth-of-type(2) {
                 display: flex;
                 * {
                     font-weight:400 !important;
                 }
-                flex-direction: column;
-                >div {
-                    display:flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    >div:first-of-type {
-                        font-size:16px;
-                        color:rgb(200,200,200);
-                    }
-                    >div:last-of-type {
-                        color:grey;
-                        text-align: right;
+                flex-direction: row;
+                >div:first-of-type {
+                    flex: 1;
+                    * {
+                        color: lightgrey;
                     }
                 }
-                >div+div {
-                    margin-top:5px;
+                >div {
+                    * {
+                        color: gray;
+                    }
+                    display: flex;
+                    flex-direction: column;
+                }
+                div+div {
+                    margin-top:10px;
                 }
             }
             >div:last-of-type {
@@ -203,8 +181,5 @@ const Container = styled.div`
         .paper+.paper {
             margin-top:15px;
         }
-    }
-    & .cycle-status {
-        color: green !important;
     }
 `;

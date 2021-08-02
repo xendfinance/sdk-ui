@@ -9,7 +9,7 @@ import { monthNames } from '../../../months';
 
 import BackIcon from '../../../assets/images/common/left-arrow.png';
 
-function EsusuCycleJoin({ match }: any) {
+function CooperativeCycleJoin({ match }: any) {
     const history = useHistory();
     const [curCycle, setCurCycle] = React.useState([]);
     const init = async (mounted:any) => {
@@ -106,7 +106,7 @@ function EsusuCycleJoin({ match }: any) {
                                 <Box component='span'>BUSD</Box>
                             </Box>
                             <Box className='sunset-contained join-cycle-btn' mt={1}>
-                                <Button className='h22' onClick={() => handleJoinCycle()}>Join Esusu</Button>
+                                <Button className='h22' onClick={() => handleJoinCycle()}>Join Cooperative</Button>
                             </Box>
                             <Box mt={3}>
                                 <Box component='span' mr={0.5}>NB:</Box> You need a minimum of 2 members to start a cycle.
@@ -120,7 +120,7 @@ function EsusuCycleJoin({ match }: any) {
     );
 }
 
-export default EsusuCycleJoin;
+export default CooperativeCycleJoin;
 
 const Container = styled.div`
     line-height: 1;

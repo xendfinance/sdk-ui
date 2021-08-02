@@ -4,11 +4,11 @@ import { Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
 import { esusu } from '../../../methods/sdk';
-import { ModalEsusuNew } from '../../modals';
-import EsusuEstimate from '../../esusu/EsusuEstimate';
+import { ModalCooperativeNew } from '../../modals';
+import CooperativeEstimate from '../../cooperative/CooperativeEstimate';
 import { CycleBadge } from '../../badges';
 
-const Esusu = () => {
+const Cooperative = () => {
     const history = useHistory();
     const [nameAll, setNameAll] = React.useState([]);
     const [cycleAll, setCycleAll] = React.useState([]);
@@ -33,11 +33,11 @@ const Esusu = () => {
         });
     }
     const handleJoin = (cycleId: any, groupName: any) => {
-        history.push(`/esusu/join/${cycleId}`);
+        history.push(`/cooperative/join/${cycleId}`);
         localStorage.setItem('curGroupName',groupName);
     };
     const handleViewGroups = () => {
-        history.push('/esusu/groups');
+        history.push('/cooperative/groups');
     }
     React.useEffect(() => {
         let mounted = true;
@@ -50,13 +50,13 @@ const Esusu = () => {
         <Container>
             <Box className='right-action'>
                 <Box className='btn-primary h5' onClick={() => handleViewGroups()}>
-                    My Esusu Unions
+                    My Cooperative Unions
                 </Box>
                 <Box className='btn-primary h5'>
                     Contributions
                 </Box>
             </Box>
-            <EsusuEstimate />
+            <CooperativeEstimate />
             {cycleAll.map((each: any, i: number) => {
                 return (
                     <Box key={i} mt={3} className='paper group'>
@@ -103,12 +103,12 @@ const Esusu = () => {
                 );
             })}
             <Box p={9}></Box>
-            <ModalEsusuNew open={open} setOpen={setOpen} />
+            <ModalCooperativeNew open={open} setOpen={setOpen} />
         </Container>
     )
 }
 
-export default Esusu;
+export default Cooperative;
 
 const Container = styled.div`
     line-height: 1;

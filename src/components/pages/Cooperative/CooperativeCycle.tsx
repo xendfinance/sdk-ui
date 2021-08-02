@@ -4,7 +4,7 @@ import { Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
 import { esusu } from '../../../methods/sdk';
-import { ModalEsusuNewCycle } from '../../modals';
+import { ModalCooperativeNewCycle } from '../../modals';
 
 import GroupIcon from '../../icons/GroupIcon';
 import BackIcon from '../../../assets/images/common/left-arrow.png';
@@ -16,14 +16,14 @@ interface GroupInfo {
     groupName: string;
 }
 
-const EsusuCycle = ({ match }: any) => {
+const CooperativeCycle = ({ match }: any) => {
     const history = useHistory();
     const [curGroup, setCurGroup] = React.useState<GroupInfo>({ groupName: '' });
     const [cycles, setCycles] = React.useState([]);
     const [open, setOpen] = React.useState(false);
 
     const handleJoinCycle = (id: any) => {
-        history.push(`/esusu/join/${id}`);
+        history.push(`/cooperative/join/${id}`);
     }
     const handleCreateCycle = () => {
         setOpen(true);
@@ -63,7 +63,7 @@ const EsusuCycle = ({ match }: any) => {
             </Box>
             <Box className='group-action' mt={3}>
                 <Box className='h1'>{localStorage.getItem('curGroupName')}</Box>
-                <Box className='sunset-contained create-esusu'>
+                <Box className='sunset-contained create-cooperative'>
                     <Button className='h3' onClick={() => handleCreateCycle()}>Create Cycle</Button>
                 </Box>
             </Box>
@@ -106,13 +106,13 @@ const EsusuCycle = ({ match }: any) => {
                     );
                 })}
             </Box>
-            <ModalEsusuNewCycle open={open} setOpen={setOpen} curGroup={curGroup} init={init} />
+            <ModalCooperativeNewCycle open={open} setOpen={setOpen} curGroup={curGroup} init={init} />
             <Box p={9}></Box>
         </Container>
     )
 }
 
-export default EsusuCycle;
+export default CooperativeCycle;
 
 const Container = styled.div`
     line-height: 1;
@@ -149,7 +149,7 @@ const Container = styled.div`
             font-size:18px !important;
         }
         
-        &>.create-esusu {
+        &>.create-cooperative {
             &>button {
                 padding: 3px 20px !important;
 

@@ -3,9 +3,7 @@ import { Modal, Box, Backdrop, Button, Fade, IconButton } from '@material-ui/cor
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { HighlightOffOutlined } from '@material-ui/icons';
 
-import { esusu } from '../../../methods/sdk';
 import { InputMinting } from '../../inputfields';
-import { GROUP_NAME, SYMBOL_NAME } from '../../inputfields/config';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -14,25 +12,23 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             justifyContent: 'center',
             '& .cooperative-modal-container': {
-                '& *': {
-                    textTransform:'none',
-                    color: 'black'
-                },
-
                 position: 'relative',
                 background: 'white',
                 borderRadius: 10,
                 boxShadow: '1px 1px 1px 1px solid red',
                 padding: '17px 17px 17px 24px',
-                width: 397,
-
+                width: 500,
+                '& * ': {
+                    textTransform:'none',
+                    color: 'black'
+                },
                 '& .header': {
                     '& .title': {
-                        lineHeight: '305.7%',
+                        lineHeight: '43.36px',
                         background: '-webkit-linear-gradient(0deg, #2042B8, #FF6600 70%, #FF6600 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
-                        fontWeight: 500
+                        fontWeight: 500,
                     },
 
                     '& .separator': {
@@ -44,23 +40,30 @@ const useStyles = makeStyles((theme: Theme) =>
 
                 '& .data-form': {
                     '& .data-label': {
-                        fontWeight: 500
+                        fontWeight: 500,
                     },
 
-                    '& .h7': {
-                        color: '#808080'
+                    '& .date-time': {
+                        display: 'flex',
+                        justifyContent: 'center',
+
+                        '& .start-date, .start-time': {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flex: 1
+                        }
                     }
                 },
-
                 '& .create-cooperative': {
+                    padding: '0px 30px',
 
                     '& button': {
-                        padding: '5px 10px',
-                        borderRadius: 80,
+                        padding: '3px 10px !important',
+                        borderRadius: '80px !important',
 
                         '& .MuiButton-label': {
-                            color: 'white',
-                            fontWeight: 500
+                            color: 'white !important',
+                            fontWeight: 500,
                         }
                     }
                 },
@@ -75,23 +78,18 @@ const useStyles = makeStyles((theme: Theme) =>
                     }
                 }
             }
-        }
+        },
     }),
 );
 
-export default function ModalCooperativeNewGroup({ setOpen, open, init }: any) {
-
-    const [name, setName] = React.useState('');
-    const [symbol, setSymbol] = React.useState('');
+export default function ModalCooperativeNew({ setOpen, open }: any) {
     const classes = useStyles();
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleCreateGroup = async () => {
+    const handleCreateCooperative = () => {
         setOpen(false);
-        await esusu.createGroup(name, symbol);
-        init(true);
     }
     return (
         <>
@@ -115,24 +113,40 @@ export default function ModalCooperativeNewGroup({ setOpen, open, init }: any) {
                             </IconButton>
                         </Box>
                         <Box className='header'>
-                            <Box className='h21 title'>Create Cooperative Group</Box>
+                            <Box className='h13 title'>Create Cooperative</Box>
                             <Box className='separator'></Box>
                         </Box>
-                        <Box mt={3} className='data-form h23'>
-                            <Box className='data-label' mb={1}>Group Name</Box>
-                            <InputMinting inputType={GROUP_NAME} setName={setName} placeholder='' />
+                        <Box mt={1.5} className='data-form h15'>
+                            <Box className='data-label' mb={0.5}>Group Name</Box>
+                            <InputMinting placeholder='Eg. Real estate loan' />
+
+                            <Box className='data-label' mb={0.5} mt={1.5}>Payment Interveral</Box>
+                            <InputMinting placeholder='Select interval' isDropdown={true} />
+
+                            <Box className='data-label' mb={0.5} mt={1.5}>Max No. of Slot</Box>
+                            <InputMinting placeholder='Max No. of Slot' isDropdown={true} />
+
+                            <Box className='data-label' mb={0.5} mt={1.5}>Contribution Amount</Box>
+                            <InputMinting placeholder='Enter amount' isDropdown={true} />
+
+                            <Box className='date-time' mb={0.5} mt={1.5}>
+                                <Box className='start-date'>
+                                    <Box className='data-label'>Start Date</Box>
+                                    <Box mt={1}><InputMinting placeholder='00_00_0000' isDateInput={true} /></Box>
+                                </Box>
+                                <Box ml={3} className='start-time'>
+                                    <Box className='data-label'>Start Time</Box>
+                                    <Box mt={1}><InputMinting placeholder='00_00' isTimeInput={true} /></Box>
+                                </Box>
+                            </Box>
+
+                            <Box className='data-label' mb={1} mt={2}>Estimated API</Box>
+                            <InputMinting placeholder='Select APY' isDropdown={true} />
                         </Box>
-                        <Box mt={2} className='data-form h23'>
-                            <Box className='data-label' mb={1}>Group Symbol</Box>
-                            <InputMinting inputType={SYMBOL_NAME} setSymbol={setSymbol} placeholder='' />
-                        </Box>
-                        <Box mt={1.5} ml={2} className='data-form h4'>
-                            A three letter unique indentifier for the Group
-                        </Box>
-                        <Box className='footer text-center' mt={5} mb={1}>
+                        <Box className='footer text-center' mt={1} mb={1}>
                             <Box mt={2.5} className='actions'></Box>
                             <Box className='sunset-contained create-cooperative'>
-                                <Button className='h22' onClick={() => handleCreateGroup()}>Create Cooperative Group</Button>
+                                <Button className='h14' onClick={() => handleCreateCooperative()}>Create Cooperative</Button>
                             </Box>
                         </Box>
                     </Box>
