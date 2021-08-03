@@ -1,7 +1,7 @@
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 
-const EsusuEstimate = () => {
+const CooperativeEstimate = () => {
     return (
         <EstimateContainer className='paper'>
             <Box className='est-root'>
@@ -15,7 +15,7 @@ const EsusuEstimate = () => {
     )
 }
 
-export default EsusuEstimate;
+export default CooperativeEstimate;
 
 const EstimateContainer = styled.div`
     & * {

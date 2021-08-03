@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { ReactComponent as PersonalActiveIcon } from '../resx/personal-active.svg';
 import { ReactComponent as EsusuActiveIcon } from '../resx/esusu-active.svg';
 import { ReactComponent as CooperativeActiveIcon } from '../resx/cooperative-active.svg';
@@ -48,7 +49,7 @@ const NavStyle = styled.section`
     padding: 10px 16px;
     border-top: 1px solid ${p => p.theme.border};
     box-shadow: 0 -1px 10px rgba(0,0,0,0.05);
-
+    
     & .items {
         display:flex;
         flex:1;
@@ -60,7 +61,7 @@ const NavStyle = styled.section`
             text-align: center;
             text-decoration: none;
             & .active {
-                font-weight:500;
+                font-weight:500 !important;
                 background: linear-gradient(95.81deg, #2042B8 -4.73%, #FF6600 100%);
                 -webkit-background-clip: text;
                 background-clip: text;
@@ -68,7 +69,7 @@ const NavStyle = styled.section`
             }
             & .inactive {
                 color:#9E9E9E;
-                font-weight:500;
+                font-weight:500 !important;
             }
         }
     }

@@ -114,6 +114,40 @@ table {
 .h16 {
 	font-size:12.4px !important;
 }
+.h17 {
+	font-size:8.7px !important;
+}
+.h18 {
+	font-size:9.33px !important;
+}
+.h19 {
+	font-size:9.57px !important;
+}
+.h20 {
+	font-size:7.44px !important;
+}
+.h21 {
+	font-size:18px !important;
+}
+.h22 {
+	font-size:16.53px !important;
+}
+.h23 {
+	font-size:13px !important;
+}
+.h24 {
+	font-size:12.4px !important;
+}
+.h25 {
+	font-size:36px !important;
+}
+.h26 {
+	font-size:18px !important;
+}
+.h27 {
+	font-size:16px !important;
+}
+
 .float-right {
 	float: right !important;
 }
@@ -175,6 +209,14 @@ table {
 	display      : inline-block;
   }
   
+  .btn-primary {
+	background: white;
+	border-radius:25px;
+	border:1px solid rgb(32,66,184);
+	padding:10px 18px;
+	cursor:pointer;
+  }
+
   .sunset-outlined {
 	background   : linear-gradient(to right, #2042B8, #FF6600);
 	border-radius: 25px;

@@ -4,6 +4,8 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { HighlightOffOutlined } from '@material-ui/icons';
 
 import { InputMinting } from '../../inputfields';
+import { esusu } from '../../../methods/sdk';
+import { DEPOSIT_AMOUNT, MAX_MEMBERS, START_DATE, START_TIME, CYCLE_DURATION } from '../../inputfields/config';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            '& .esusu-modal-container': {
+            '& .cooperative-modal-container': {
                 position: 'relative',
                 background: 'white',
                 borderRadius: 10,
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 padding: '17px 17px 17px 24px',
                 width: 500,
                 '& * ': {
-                    textTransform:'none',
+                    textTransform: 'none',
                     color: 'black'
                 },
                 '& .header': {
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
                         }
                     }
                 },
-                '& .create-esusu': {
+                '& .create-cooperative': {
                     padding: '0px 30px',
 
                     '& button': {
@@ -79,17 +81,44 @@ const useStyles = makeStyles((theme: Theme) =>
                 }
             }
         },
+        cycleSelect: {
+            border: '1px solid #B2B2B2',
+            borderRadius: 25,
+            padding: '10px 15px',
+            outline: 'none',
+            fontSize: 16,
+            '&:hover': {
+                borderColor: 'blue'
+            }
+        }
     }),
 );
 
-export default function ModalNewEsusu({ setOpen, open }: any) {
+export default function ModalCooperativeNewCycle({ setOpen, open, curGroup, init }: any) {
+    const [depo, setDepo] = React.useState(0);
+    const [max, setMax] = React.useState(0);
+    const [unit, setUnit] = React.useState(3600);
+    const [cycleDuration, setCycleDuration] = React.useState(0.0);
+
     const classes = useStyles();
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleCreateEsusu = () => {
+    const handleCreateCycle = async () => {
         setOpen(false);
+        await esusu.create({
+            groupId: curGroup[0],
+            depositAmount: depo.toString() ,
+            payoutIntervalInSeconds: cycleDuration * unit,
+            startTimeInSeconds: (new Date().getTime()),
+            maxMembers: max,
+        });
+        init(true);
+    }
+
+    const handleSelect = (e: any) => {
+        setUnit(parseInt(e.target.value));
     }
     return (
         <>
@@ -106,47 +135,55 @@ export default function ModalNewEsusu({ setOpen, open }: any) {
                 }}
             >
                 <Fade in={open}>
-                    <Box className='esusu-modal-container'>
+                    <Box className='cooperative-modal-container'>
                         <Box className='dismiss'>
                             <IconButton size='medium' onClick={handleClose}>
                                 <HighlightOffOutlined fontSize='medium' />
                             </IconButton>
                         </Box>
                         <Box className='header'>
-                            <Box className='h13 title'>Create Esusu</Box>
+                            <Box className='h13 title'>Create cycle</Box>
                             <Box className='separator'></Box>
                         </Box>
                         <Box mt={1.5} className='data-form h15'>
-                            <Box className='data-label' mb={0.5}>Group Name</Box>
-                            <InputMinting placeholder='Eg. Real estate loan' />
+                            <Box className='data-label' mb={0.5}>Deposit Amount</Box>
+                            <InputMinting inputType={DEPOSIT_AMOUNT} setDepo={setDepo} placeholder='10' />
 
-                            <Box className='data-label' mb={0.5} mt={1.5}>Payment Interveral</Box>
-                            <InputMinting placeholder='Select interval' isDropdown={true} />
-
-                            <Box className='data-label' mb={0.5} mt={1.5}>Max No. of Slot</Box>
-                            <InputMinting placeholder='Max No. of Slot' isDropdown={true} />
-
-                            <Box className='data-label' mb={0.5} mt={1.5}>Contribution Amount</Box>
-                            <InputMinting placeholder='Enter amount' isDropdown={true} />
+                            <Box className='date-time' mb={0.5} mt={1.5}>
+                                <Box className='start-date'>
+                                    <Box className='data-label' mb={0.5}>Cycle duration</Box>
+                                    <InputMinting inputType={CYCLE_DURATION} setCycleDuration={setCycleDuration} placeholder='10' />
+                                </Box>
+                                <Box ml={3}>
+                                    <Box mt={1}>
+                                        <Box component='select' className={classes.cycleSelect} onChange={handleSelect} defaultValue='3600'>
+                                            <option value='60'>Minutes</option>
+                                            <option value='3600'>Hours</option>
+                                            <option value='86400'>Days</option>
+                                            <option value='604800'>Weeks</option>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
 
                             <Box className='date-time' mb={0.5} mt={1.5}>
                                 <Box className='start-date'>
                                     <Box className='data-label'>Start Date</Box>
-                                    <Box mt={1}><InputMinting placeholder='00_00_0000' isDateInput={true} /></Box>
+                                    <Box mt={1}><InputMinting inputType={START_DATE} placeholder='00_00_0000' isDateInput={true} /></Box>
                                 </Box>
                                 <Box ml={3} className='start-time'>
                                     <Box className='data-label'>Start Time</Box>
-                                    <Box mt={1}><InputMinting placeholder='00_00' isTimeInput={true} /></Box>
+                                    <Box mt={1}><InputMinting inputType={START_TIME} placeholder='00_00' isTimeInput={true} /></Box>
                                 </Box>
                             </Box>
 
-                            <Box className='data-label' mb={1} mt={2}>Estimated API</Box>
-                            <InputMinting placeholder='Select APY' isDropdown={true} />
+                            <Box className='data-label' mb={0.5}>Max Members</Box>
+                            <InputMinting inputType={MAX_MEMBERS} setMax={setMax} placeholder='2' />
                         </Box>
                         <Box className='footer text-center' mt={1} mb={1}>
                             <Box mt={2.5} className='actions'></Box>
-                            <Box className='sunset-contained create-esusu'>
-                                <Button className='h14' onClick={() => handleCreateEsusu()}>Create Esusu</Button>
+                            <Box className='sunset-contained create-cooperative'>
+                                <Button className='h14' onClick={() => handleCreateCycle()}>Create Cooperative</Button>
                             </Box>
                         </Box>
                     </Box>

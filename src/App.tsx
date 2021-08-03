@@ -4,13 +4,18 @@ import EE from 'event-emitter';
 import Theme from './theme/ThemeContext';
 import styled, { css } from 'styled-components';
 
-import EsusuContributions from './components/esusu/EsusuContributions';
 import Cooperative from './components/pages/Cooperative';
-import EsusuJoin from './components/esusu/EsusuJoin';
 import Personal from './components/pages/Personal';
 import Navigation from './components/Navigation';
 import Esusu from './components/pages/Esusu';
 import Header from './components/Header';
+import EsusuGroup from './components/pages/Esusu/EsusuGroup';
+import EsusuCycle from './components/pages/Esusu/EsusuCycle';
+import EsusuCycleJoin from './components/pages/Esusu/EsusuCycleJoin';
+
+import CooperativeGroup from './components/pages/Cooperative/CooperativeGroup';
+import CooperativeCycle from './components/pages/Cooperative/CooperativeCycle';
+import CooperativeCycleJoin from './components/pages/Cooperative/CooperativeCycleJoin';
 
 
 const emitter = EE();
@@ -29,6 +34,7 @@ function App() {
 
   let timeout: any = null;
   const [activities, setActivites] = useState<Array<string>>([])
+
   const [state, setState] = useState({
     show: false,
     message: "",
@@ -95,21 +101,15 @@ function App() {
           </Loader>
           <main>
             <Switch>
-              <Route exact path="/personal">
-                <Personal />
-              </Route>
-              <Route exact path="/esusu">
-                <Esusu />
-              </Route>
-              <Route exact path="/cooperative">
-                <Cooperative />
-              </Route>
-              <Route exact path='/esusu-contributions'>
-                <EsusuContributions />
-              </Route>
-              <Route exact path='/esusu-join'>
-                <EsusuJoin />
-              </Route>
+              <Route exact path="/personal" render={(props) => <Personal />} />
+              <Route exact path="/esusu" render={(props) => <Esusu />} />
+              <Route exact path="/cooperative" render={(props) => <Cooperative />} />
+              <Route exact path="/esusu/groups" render={(props) => <EsusuGroup />} />
+              <Route exact path="/cooperative/groups" render={(props) => <CooperativeGroup />} />
+              <Route exact path='/esusu/group/:id' render={(props) => <EsusuCycle {...props} />} />
+              <Route exact path='/esusu/join/:id' render={(props) => <EsusuCycleJoin {...props} />} />
+              <Route exact path='/cooperative/group/:id' render={(props) => <CooperativeCycle {...props} />} />
+              <Route exact path='/cooperative/join/:id' render={(props) => <CooperativeCycleJoin {...props} />} />
             </Switch>
           </main>
           <Navigation setHeading={setHeading} heading={heading} />

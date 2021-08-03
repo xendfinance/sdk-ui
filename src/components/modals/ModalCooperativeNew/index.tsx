@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            '& .esusu-modal-container': {
+            '& .cooperative-modal-container': {
                 position: 'relative',
                 background: 'white',
                 borderRadius: 10,
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
                         }
                     }
                 },
-                '& .create-esusu': {
+                '& .create-cooperative': {
                     padding: '0px 30px',
 
                     '& button': {
@@ -82,13 +82,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function ModalNewEsusu({ setOpen, open }: any) {
+export default function ModalCooperativeNew({ setOpen, open }: any) {
     const classes = useStyles();
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleCreateEsusu = () => {
+    const handleCreateCooperative = () => {
         setOpen(false);
     }
     return (
@@ -106,14 +106,14 @@ export default function ModalNewEsusu({ setOpen, open }: any) {
                 }}
             >
                 <Fade in={open}>
-                    <Box className='esusu-modal-container'>
+                    <Box className='cooperative-modal-container'>
                         <Box className='dismiss'>
                             <IconButton size='medium' onClick={handleClose}>
                                 <HighlightOffOutlined fontSize='medium' />
                             </IconButton>
                         </Box>
                         <Box className='header'>
-                            <Box className='h13 title'>Create Esusu</Box>
+                            <Box className='h13 title'>Create Cooperative</Box>
                             <Box className='separator'></Box>
                         </Box>
                         <Box mt={1.5} className='data-form h15'>
@@ -145,8 +145,8 @@ export default function ModalNewEsusu({ setOpen, open }: any) {
                         </Box>
                         <Box className='footer text-center' mt={1} mb={1}>
                             <Box mt={2.5} className='actions'></Box>
-                            <Box className='sunset-contained create-esusu'>
-                                <Button className='h14' onClick={() => handleCreateEsusu()}>Create Esusu</Button>
+                            <Box className='sunset-contained create-cooperative'>
+                                <Button className='h14' onClick={() => handleCreateCooperative()}>Create Cooperative</Button>
                             </Box>
                         </Box>
                     </Box>
