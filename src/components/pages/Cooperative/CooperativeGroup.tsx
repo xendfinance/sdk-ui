@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
-import { esusu } from '../../../methods/sdk';
+import { cooperative } from '../../../methods/sdk';
 import { ModalCooperativeNewGroup } from '../../modals';
 
 import GroupIcon from '../../icons/GroupIcon';
@@ -25,11 +25,11 @@ const CooperativeGroup = () => {
         history.goBack();
     }
     const init = async (mounted:any) => {
-        const groups: any = await esusu.getGroups();
+        const groups: any = await cooperative.groups();
 
         let totalCycleLengths: any = [];
         for (let i = 0; i < groups.length; i++) {
-            const cycles: any = await esusu.cyclesInGroup(groups[i][0]);
+            const cycles: any = await cooperative.cyclesInGroup(groups[i][0]);
             totalCycleLengths.push(cycles.length);
         }
 

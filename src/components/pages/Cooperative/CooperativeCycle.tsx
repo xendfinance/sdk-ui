@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
-import { esusu } from '../../../methods/sdk';
+import { cooperative } from '../../../methods/sdk';
 import { ModalCooperativeNewCycle } from '../../modals';
 
 import GroupIcon from '../../icons/GroupIcon';
@@ -32,8 +32,8 @@ const CooperativeCycle = ({ match }: any) => {
         history.goBack();
     }
     const init = async (mounted:any) => {
-        const groups: any = await esusu.getGroups();
-        const cycles: any = await esusu.cyclesInGroup(match.params.id);
+        const groups: any = await cooperative.groups();
+        const cycles: any = await cooperative.cyclesInGroup(match.params.id);
 
         if(mounted) {
             if(groups.length > 0)
@@ -80,7 +80,7 @@ const CooperativeCycle = ({ match }: any) => {
                             <Box mt={4} mb={5} >
                                 <Box>
                                     <Box>Deposit Amount</Box>
-                                    <Box><Box component='span'>{each.DepositAmount / Math.pow(10, 18)}</Box> BUSD</Box>
+                                    <Box><Box component='span'>{each.cycleStakeAmount / Math.pow(10, 18)}</Box> BUSD</Box>
                                 </Box>
                                 <Box>
                                     <Box>Payout interval Per Member</Box>

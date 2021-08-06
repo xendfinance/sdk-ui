@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { Box, Button } from '@material-ui/core';
 
-import { esusu } from '../../../methods/sdk';
+import { cooperative } from '../../../methods/sdk';
 import { CycleBadge } from '../../badges';
 import { monthNames } from '../../../months';
 
@@ -13,14 +13,14 @@ function CooperativeCycleJoin({ match }: any) {
     const history = useHistory();
     const [curCycle, setCurCycle] = React.useState([]);
     const init = async (mounted:any) => {
-        const cycle: any = await esusu.info(match.params.id);
+        const cycle: any = await cooperative.info(match.params.id);
         if(mounted) setCurCycle(cycle);
     }
     const handleGoBack = () => {
         history.goBack();
     }
     const handleJoinCycle = async () => {
-        const result = await esusu.join(curCycle[0]);
+        const result = await cooperative.join(curCycle[0], 1);
         console.log(result);
     }
     const returnDateFormat = (date: any) => {

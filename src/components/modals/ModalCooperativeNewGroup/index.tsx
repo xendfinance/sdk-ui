@@ -3,7 +3,7 @@ import { Modal, Box, Backdrop, Button, Fade, IconButton } from '@material-ui/cor
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { HighlightOffOutlined } from '@material-ui/icons';
 
-import { esusu } from '../../../methods/sdk';
+import { cooperative } from '../../../methods/sdk';
 import { InputMinting } from '../../inputfields';
 import { GROUP_NAME, SYMBOL_NAME } from '../../inputfields/config';
 
@@ -90,7 +90,7 @@ export default function ModalCooperativeNewGroup({ setOpen, open, init }: any) {
 
     const handleCreateGroup = async () => {
         setOpen(false);
-        await esusu.createGroup(name, symbol);
+        await cooperative.createGroup(name, symbol);
         init(true);
     }
     return (

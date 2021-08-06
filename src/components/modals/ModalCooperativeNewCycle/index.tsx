@@ -4,7 +4,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { HighlightOffOutlined } from '@material-ui/icons';
 
 import { InputMinting } from '../../inputfields';
-import { esusu } from '../../../methods/sdk';
+import { cooperative } from '../../../methods/sdk';
 import { DEPOSIT_AMOUNT, MAX_MEMBERS, START_DATE, START_TIME, CYCLE_DURATION } from '../../inputfields/config';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -107,9 +107,9 @@ export default function ModalCooperativeNewCycle({ setOpen, open, curGroup, init
 
     const handleCreateCycle = async () => {
         setOpen(false);
-        await esusu.create({
+        await cooperative.create({
             groupId: curGroup[0],
-            depositAmount: depo.toString() ,
+            cycleStakeAmount: depo.toString() ,
             payoutIntervalInSeconds: cycleDuration * unit,
             startTimeInSeconds: (new Date().getTime()),
             maxMembers: max,
