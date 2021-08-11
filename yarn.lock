@@ -2591,11 +2591,12 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@xend-finance/web-sdk@0.0.4-beta.0":
-  version "0.0.4-beta.0"
-  resolved "https://registry.yarnpkg.com/@xend-finance/web-sdk/-/web-sdk-0.0.4-beta.0.tgz#4a80d0619959f26701f2f391791b1da81b6a44b4"
-  integrity sha512-zJsEAqYJcm5kCPrBcL4fQ6kKowLf5jWGRhSZ8duBzuk9q2fW4hTe269csR7eXqDxjjj7D0ipjaZg3GGaduNxpQ==
+"@xend-finance/web-sdk@0.0.5-beta.0":
+  version "0.0.5-beta.0"
+  resolved "https://registry.yarnpkg.com/@xend-finance/web-sdk/-/web-sdk-0.0.5-beta.0.tgz#49be7af1629aec30eea9a98bdec83990cf851ae1"
+  integrity sha512-HyQecvAK9YMrow1tMt1rcXFfQwt/NuZx0gwJlOISwb571Gf4fdqKiM8XXSEzuC1ba7ZCFt5FR+KzL0Kz70Z5OA==
   dependencies:
+    axios "^0.21.1"
     web3 "^1.3.3"
 
 "@xtuc/ieee754@^1.2.0":
@@ -3005,6 +3006,13 @@ axe-core@^4.0.2:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.2.1.tgz#2e50bcf10ee5b819014f6e342e41e45096239e34"
   integrity sha512-evY7DN8qSIbsW2H/TWQ1bX3sXN1d4MNb5Vb4n7BzPuCwRHdkZ1H2eNLuSh73EoQqkGKUtju2G2HCcjCfhvZIAA==
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -5838,7 +5846,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
   integrity sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg==
