@@ -107,9 +107,9 @@ export default function ModalEsusuNewCycle({ setOpen, open, curGroup, init }: an
 
     const handleCreateCycle = async () => {
         setOpen(false);
-        await esusu.create({
+        const ad = await esusu.create({
             groupId: curGroup[0],
-            depositAmount: depo.toString() ,
+            depositAmount: depo.toString(),
             payoutIntervalInSeconds: cycleDuration * unit,
             startTimeInSeconds: (new Date().getTime()),
             maxMembers: max,
