@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             '& .cooperative-modal-container': {
                 '& *': {
-                    textTransform:'none',
+                    textTransform: 'none',
                     color: 'black'
                 },
 

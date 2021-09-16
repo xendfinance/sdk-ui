@@ -14,13 +14,15 @@ const Esusu = () => {
     const [cycleAll, setCycleAll] = React.useState([]);
     const [open, setOpen] = React.useState(false);
 
-    const init = async (mounted:any) => {
+    const init = async (mounted: any) => {
         const groups: any = await esusu.getGroups();
+        console.log(groups, ' the groups')
 
         let cyclesTemp: any = [];
         let nameTemp: any = [];
         groups.map(async (each: any, i: number) => {
             await esusu.cyclesInGroup(each[0]).then(res => {
+                console.log(res)
                 if (res.length > 0) {
                     cyclesTemp = cyclesTemp.concat(res);
                     for (let j = 0; j < res.length; j++) nameTemp.push(each[1]);
@@ -32,9 +34,10 @@ const Esusu = () => {
             });
         });
     }
+    console.log(cycleAll, nameAll, ' sfdlfow')
     const handleJoin = (cycleId: any, groupName: any) => {
         history.push(`/esusu/join/${cycleId}`);
-        localStorage.setItem('curGroupName',groupName);
+        localStorage.setItem('curGroupName', groupName);
     };
     const handleViewGroups = () => {
         history.push('/esusu/groups');

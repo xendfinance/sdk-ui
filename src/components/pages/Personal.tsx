@@ -36,6 +36,7 @@ function Personal() {
         const activityId = randomId();
         regActivity(activityId)
         const info = await personal.flexibleInfo();
+        console.log(info, ' at component')
         setFlexibleInfo(info);
         regActivity(activityId)
     }
@@ -99,7 +100,7 @@ function Personal() {
                         </div>
                     </div>
                     <div>
-                        <button onClick={() => notification('success', 'totally worth' + Date.now())}>notify</button>
+                        {/* <button onClick={() => notification('success', 'totally worth' + Date.now())}>notify</button> */}
                     </div>
                     <div>
                         <Labels>

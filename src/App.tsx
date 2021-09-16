@@ -97,10 +97,11 @@ function App() {
         <Wrapper activity={loading()}>
           <Header heading={heading} />
           <Loader activity={loading()}>
-            <p>Loading</p>
+            <i className="fa fa-spinner fa-spin"></i>
           </Loader>
           <main>
             <Switch>
+              <Route exact path="/" render={(props) => <Personal />} />
               <Route exact path="/personal" render={(props) => <Personal />} />
               <Route exact path="/esusu" render={(props) => <Esusu />} />
               <Route exact path="/cooperative" render={(props) => <Cooperative />} />
@@ -163,6 +164,8 @@ const Loader = styled.div<WProps>`
   overflow-y: hidden;
   padding: 30px;
   transition: all 400ms ease;
+  text-align: center;
+  color: gray;
 
   ${p => p.activity && css`
     z-index: 1;
